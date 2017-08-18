@@ -1,5 +1,6 @@
-class QuestionsController < ApplicationController
+class QuestionsController < ApiController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   # GET /questions
   # GET /questions.json
