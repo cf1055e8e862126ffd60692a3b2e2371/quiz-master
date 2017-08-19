@@ -10,12 +10,12 @@ export const setQuestions = ({ questions }) => ({
   questions,
 })
 
-export const addQuestion = ({ question }) => ({
+export const addQuestion = (question) => ({
   type: ADD_QUESTION,
   question,
 })
 
-export const updateQuestion = ({ question }) => ({
+export const updateQuestion = (question) => ({
   type: UPDATE_QUESTION,
   question,
 })
