@@ -12,6 +12,11 @@ RSpec.shared_examples 'invalid resource' do
   end
 end
 
+RSpec.shared_context 'select a question' do
+  let(:question) { @questions[1] }
+  let(:url) { "#{questions_path}/#{question.id}" }
+end
+
 RSpec.describe "Questions", type: :request do
   before(:each) do
     @questions = FactoryGirl.create_list(:question, 3)
@@ -38,8 +43,10 @@ RSpec.describe "Questions", type: :request do
   end
 
   describe 'GET /questions/:id' do
+    include_context 'select a question'
+
     context 'when valid request' do
-      let(:question) { @questions[1] }
+
       let(:json_expected) do
         {
           'id' => question.id,
@@ -49,7 +56,7 @@ RSpec.describe "Questions", type: :request do
       end
 
       it 'returns specified question' do
-        get "#{questions_path}/#{question.id}", headers: headers
+        get url, headers: headers
         expect(response).to have_http_status(200)
         expect(json_response).to eq(json_expected)
       end
@@ -95,7 +102,7 @@ RSpec.describe "Questions", type: :request do
   end
 
   describe 'PUT /questions' do
-    let(:question) { @questions[1] }
+    include_context 'select a question'
 
     before(:each) do
       @params = FactoryGirl.attributes_for(:question)
@@ -103,13 +110,13 @@ RSpec.describe "Questions", type: :request do
 
     context 'when valid request' do
       it 'update specified question' do
-        put "#{questions_path}/#{question.id}", params: @params, headers: headers
+        put url, params: @params, headers: headers
         expect(question.reload.content).to eq(@params[:content])
         expect(question.reload.answer).to eq(@params[:answer])
       end
 
       it 'returns updated question' do
-        put "#{questions_path}/#{question.id}", params: @params, headers: headers
+        put url, params: @params, headers: headers
         expect(response).to have_http_status(200)
         expect(json_response['content']).to eq(@params[:content])
         expect(json_response['answer']).to eq(@params[:answer])
@@ -127,7 +134,7 @@ RSpec.describe "Questions", type: :request do
     context 'when invalid request' do
       before do
         params = { content: 'hoge', answer: '' }
-        put "#{questions_path}/#{question.id}", params: params, headers: headers
+        put url, params: params, headers: headers
       end
 
       include_examples 'invalid resource'
@@ -135,17 +142,17 @@ RSpec.describe "Questions", type: :request do
   end
 
   describe 'DELETE /questions/:id' do
-    let(:question) { @questions[1] }
+    include_context 'select a question'
 
     context 'when valid request' do
       it 'delete specified question' do
         expect do
-          delete "#{questions_path}/#{question.id}", headers: headers
+          delete url, headers: headers
         end.to change { Question.count }.by(-1)
       end
 
       it 'returns no content' do
-        delete "#{questions_path}/#{question.id}", headers: headers
+        delete url, headers: headers
         expect(response).to have_http_status(204)
         expect(response.body).to eq('')
       end
