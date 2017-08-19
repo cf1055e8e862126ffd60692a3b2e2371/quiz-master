@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const questionsPath = '/api/questions.json'
+const questionsPath = '/api/questions'
 
 export default {
   getList: () => (
