@@ -18,7 +18,7 @@ class QuestionRow extends React.Component {
   }
 
   onDelete() {
-    console.log('onDelete', this.props.order)
+    this.props.deleteQuestion(this.props.question.id)
   }
 
   onCancel() {
@@ -30,11 +30,14 @@ class QuestionRow extends React.Component {
   }
 
   onSend() {
-    console.log('onSend', this.state.content, this.state.answer)
+    this.props.updateQuestion({
+      id: this.props.question.id,
+      content: this.state.content,
+      answer: this.state.answer,
+    })
   }
 
   onChange(key, value) {
-    console.log('onChange', key, value)
     this.setState({ [key]: value })
   }
 
@@ -108,9 +111,12 @@ class QuestionRow extends React.Component {
 QuestionRow.propTypes = {
   order: PropTypes.number.isRequired,
   question: PropTypes.shape({
+    id: PropTypes.number,
     content: PropTypes.string,
     answer: PropTypes.string,
   }).isRequired,
+  updateQuestion: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
 }
 
 export default QuestionRow
