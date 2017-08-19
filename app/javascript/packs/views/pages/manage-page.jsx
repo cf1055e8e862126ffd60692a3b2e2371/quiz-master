@@ -9,7 +9,7 @@ class ManagePage extends React.Component {
   render() {
     if (!this.props.questions) { return <div /> }
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Content</th>
