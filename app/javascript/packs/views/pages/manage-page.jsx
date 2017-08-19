@@ -17,13 +17,13 @@ class ManagePage extends React.Component {
             <th>Index</th>
             <th>Content</th>
             <th>Answer</th>
-            <th></th>
+            <th />
           </tr>
         </thead>
         <tbody>
           {
             this.props.questions.map((question, i) => (
-              <QuestionRow key={question.id} order={i+1} question={question} />
+              <QuestionRow key={question.id} order={i + 1} question={question} />
             ))
           }
         </tbody>

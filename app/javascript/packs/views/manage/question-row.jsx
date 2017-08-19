@@ -44,7 +44,7 @@ class QuestionRow extends React.Component {
       return (
         <ContentInput
           defaultValue={currentContent}
-          onChange={value => { this.onChange('content', value) }} 
+          onChange={(value) => { this.onChange('content', value) }}
         />
       )
     }
@@ -57,7 +57,7 @@ class QuestionRow extends React.Component {
       return (
         <AnswerInput
           defaultValue={currentAnswer}
-          onChange={value => { this.onChange('answer', value) }} 
+          onChange={(value) => { this.onChange('answer', value) }}
         />
       )
     }
@@ -107,7 +107,10 @@ class QuestionRow extends React.Component {
 
 QuestionRow.propTypes = {
   order: PropTypes.number.isRequired,
-  question: PropTypes.object.isRequired,
+  question: PropTypes.shape({
+    content: PropTypes.string,
+    answer: PropTypes.string,
+  }).isRequired,
 }
 
 export default QuestionRow
