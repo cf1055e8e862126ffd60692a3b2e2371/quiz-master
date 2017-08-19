@@ -1,5 +1,12 @@
 require 'rails_helper'
 
+RSpec.shared_examples 'not found' do
+  it 'returns not found' do
+    expect(response).to have_http_status(404)
+    expect(json_response).to eq({ 'error' => 'not_found' })
+  end
+end
+
 RSpec.describe "Questions", type: :request do
   before(:each) do
     @questions = FactoryGirl.create_list(:question, 3)
@@ -41,6 +48,14 @@ RSpec.describe "Questions", type: :request do
         expect(response).to have_http_status(200)
         expect(json_response).to eq(json_expected)
       end
+    end
+
+    context 'when non-existent id is specified' do
+      before(:each) do
+        get "#{questions_path}/hogehoge", headers: headers
+      end
+
+      include_examples 'not found'
     end
   end
 
@@ -86,6 +101,14 @@ RSpec.describe "Questions", type: :request do
         expect(json_response['answer']).to eq(@params[:answer])
       end
     end
+
+    context 'when non-existent id is specified' do
+      before(:each) do
+        put "#{questions_path}/hogehoge", params: @params, headers: headers
+      end
+
+      include_examples 'not found'
+    end
   end
 
   describe 'DELETE /questions/:id' do
@@ -103,6 +126,14 @@ RSpec.describe "Questions", type: :request do
         expect(response).to have_http_status(204)
         expect(response.body).to eq('')
       end
+    end
+
+    context 'when non-existent id is specified' do
+      before(:each) do
+        delete "#{questions_path}/hogehoge", headers: headers
+      end
+
+      include_examples 'not found'
     end
   end
 end
