@@ -17,7 +17,7 @@ class QuestionsController < ApiController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(content: params[:content], answer: params[:answer])
+    @question = Question.new(question_params)
 
     respond_to do |format|
       if @question.save
@@ -32,7 +32,7 @@ class QuestionsController < ApiController
   # PATCH/PUT /questions/1.json
   def update
     respond_to do |format|
-      if @question.update(content: params[:content], answer: params[:answer])
+      if @question.update(question_params)
         format.json { render :show, status: :ok, location: @question }
       else
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -57,6 +57,6 @@ class QuestionsController < ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:content, :answer)
+      params.permit(:content, :answer)
     end
 end
