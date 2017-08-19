@@ -17,6 +17,7 @@ class ManagePage extends React.Component {
             <th>Index</th>
             <th>Content</th>
             <th>Answer</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
