@@ -17,7 +17,7 @@ class QuestionsController < ApiController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(content: params[:content], answer: params[:answer])
 
     respond_to do |format|
       if @question.save
@@ -32,7 +32,7 @@ class QuestionsController < ApiController
   # PATCH/PUT /questions/1.json
   def update
     respond_to do |format|
-      if @question.update(question_params)
+      if @question.update(content: params[:content], answer: params[:answer])
         format.json { render :show, status: :ok, location: @question }
       else
         format.json { render json: @question.errors, status: :unprocessable_entity }
