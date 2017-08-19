@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.shared_examples 'not found' do
   it 'returns not found' do
     expect(response).to have_http_status(404)
-    expect(json_response).to eq({ 'error' => 'not_found' })
+  end
+end
+
+RSpec.shared_examples 'invalid resource' do
+  it 'returns unprocessable entity' do
+    expect(response).to have_http_status(422)
   end
 end
 
@@ -78,6 +83,15 @@ RSpec.describe "Questions", type: :request do
         expect(json_response['answer']).to eq(@params[:answer])
       end
     end
+
+    context 'when invalid request' do
+      before do
+        params = { content: 'hoge', answer: '' }
+        post questions_path, params: params, headers: headers
+      end
+
+      include_examples 'invalid resource'
+    end
   end
 
   describe 'PUT /questions' do
@@ -108,6 +122,15 @@ RSpec.describe "Questions", type: :request do
       end
 
       include_examples 'not found'
+    end
+
+    context 'when invalid request' do
+      before do
+        params = { content: 'hoge', answer: '' }
+        put "#{questions_path}/#{question.id}", params: params, headers: headers
+      end
+
+      include_examples 'invalid resource'
     end
   end
 

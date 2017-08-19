@@ -14,7 +14,7 @@ class ApiController < ApplicationController
   private
     def render_error(status)
       respond_to do |format|
-        format.json { render json: { error: status.to_s }, status: status }
+        format.json { render json: {}, status: status }
       end
     end
 end
