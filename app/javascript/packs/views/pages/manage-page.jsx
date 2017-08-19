@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import QuestionRow from '../manage/question-row'
 
 class ManagePage extends React.Component {
   constructor(props) {
@@ -12,17 +13,15 @@ class ManagePage extends React.Component {
       <table className="table">
         <thead>
           <tr>
+            <th>Index</th>
             <th>Content</th>
             <th>Answer</th>
           </tr>
         </thead>
         <tbody>
           {
-            this.props.questions.map(question => (
-              <tr key={question.id}>
-                <td>{question.content}</td>
-                <td>{question.answer}</td>
-              </tr>
+            this.props.questions.map((question, i) => (
+              <QuestionRow key={question.id} order={i+1} question={question} />
             ))
           }
         </tbody>
