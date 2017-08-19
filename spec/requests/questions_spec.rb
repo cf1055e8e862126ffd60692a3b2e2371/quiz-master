@@ -22,7 +22,7 @@ RSpec.describe "Questions", type: :request do
     @questions = FactoryGirl.create_list(:question, 3)
   end
 
-  describe "GET /questions" do
+  describe "GET /api/questions" do
     context 'when valid request' do
       let(:json_expected) do
         @questions.map do |question|
@@ -42,7 +42,7 @@ RSpec.describe "Questions", type: :request do
     end
   end
 
-  describe 'GET /questions/:id' do
+  describe 'GET /api/questions/:id' do
     include_context 'select a question'
 
     context 'when valid request' do
@@ -71,7 +71,7 @@ RSpec.describe "Questions", type: :request do
     end
   end
 
-  describe 'POST /questions' do
+  describe 'POST /api/questions' do
     context 'when valid request' do
       before(:each) do
         @params = FactoryGirl.attributes_for(:question)
@@ -101,7 +101,7 @@ RSpec.describe "Questions", type: :request do
     end
   end
 
-  describe 'PUT /questions' do
+  describe 'PUT /api/questions' do
     include_context 'select a question'
 
     before(:each) do
@@ -141,7 +141,7 @@ RSpec.describe "Questions", type: :request do
     end
   end
 
-  describe 'DELETE /questions/:id' do
+  describe 'DELETE /api/questions/:id' do
     include_context 'select a question'
 
     context 'when valid request' do
