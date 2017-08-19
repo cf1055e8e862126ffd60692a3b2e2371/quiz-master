@@ -9,7 +9,7 @@ const AppRouterComponent = () => (
     <Switch>
       <Route
         exact
-        path="/manage/index"
+        path="/manage"
         component={ManagePage}
       />
       <Route component={NotFoundPage} />
