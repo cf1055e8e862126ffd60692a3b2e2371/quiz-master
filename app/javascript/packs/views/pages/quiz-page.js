@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ManagePage from '../pages/manage-page.jsx'
+import QuizPage from '../pages/quiz-page.jsx'
 import { startGetQuestionsCommand } from '../../actions/question'
 import getCommandId from '../../helpers/get-command-id'
 
@@ -13,9 +13,9 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-const ManagePageContainer = connect(
+const QuizPageContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ManagePage)
+)(QuizPage)
 
-export default ManagePageContainer
+export default QuizPageContainer
