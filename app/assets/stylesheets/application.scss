@@ -4,3 +4,38 @@
 button {
   margin: 0 5px;
 }
+
+.quiz-page {
+  margin: 30px 20px;
+  font-size: xx-large;
+}
+
+.quiz-prev {
+  float: left;
+}
+
+.quiz-next {
+  float: right;
+}
+
+.quiz-content {
+  width: 50%;
+}
+
+.quiz-answer-input {
+  width: 50%;
+  height: 60px;
+  font-size: x-large;
+}
+
+.quiz-answer-button-container {
+  text-align: center;
+}
+
+.quiz-answer-button {
+  font-size: x-large;
+}
+
+.quiz-answer-result {
+  height: 50px;
+}

@@ -27,10 +27,20 @@ class QuizPage extends React.Component {
       return <div>There are no questions!</div>
     }
     return (
-      <div>
+      <div className="quiz-page">
         <QuizView question={this.props.questions[this.state.page - 1]} />
-        <div role="button" tabIndex={0} onClick={() => (this.prevPage())}>←</div>
-        <div role="button" tabIndex={0} onClick={() => (this.nextPage())}>→</div>
+        <div
+          className="quiz-prev"
+          role="button"
+          tabIndex={0}
+          onClick={() => (this.prevPage())}
+        ><span className="glyphicon glyphicon-chevron-left" /></div>
+        <div
+          className="quiz-next"
+          role="button"
+          tabIndex={0}
+          onClick={() => (this.nextPage())}
+        ><span className="glyphicon glyphicon-chevron-right" /></div>
       </div>
     )
   }

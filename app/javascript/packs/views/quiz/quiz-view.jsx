@@ -36,24 +36,30 @@ class QuizView extends React.Component {
 
   render() {
     return (
-      <section>
-        <div>Q. {this.props.question.content}</div>
-        <div>A.
+      <section className="form-horizontal">
+        <div className="form-group">
+          <label className="col-sm-3 control-label">Q.</label>
+          <div className="col-sm-9 quiz-content">
+            {this.props.question.content}
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="col-sm-3 control-label">A.</label>
           <input
             type="text"
-            className="form-control"
+            className="col-sm-9 form-control quiz-answer-input"
             placeholder="Input Answer !"
             onChange={(event) => {
               this.onChange(event.target.value)
             }}
           />
         </div>
-        <div>
+        <div className="quiz-answer-button-container">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary quiz-answer-button"
             onClick={() => { this.onClickCheck() }}
           >Check</button>
-          <div>{this.answerResult}</div>
+          <div className="quiz-answer-result">{this.answerResult}</div>
         </div>
       </section>
     )
