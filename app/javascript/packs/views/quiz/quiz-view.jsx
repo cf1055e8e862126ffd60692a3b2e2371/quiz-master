@@ -4,9 +4,12 @@ import PropTypes from 'prop-types'
 class QuizView extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isCorrect: undefined,
-      answer: '',
+    this.state = this.initialState
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.question.id !== nextProps.question.id) {
+      this.setState(this.initialState)
     }
   }
 
@@ -20,8 +23,14 @@ class QuizView extends React.Component {
     })
   }
 
+  get initialState() {
+    return {
+      isCorrect: undefined,
+      answer: '',
+    }
+  }
+
   isCorrectAnswer() {
-    console.log(this.state.answer, this.props.question.answer)
     return (this.state.answer === this.props.question.answer)
   }
 
@@ -49,6 +58,7 @@ class QuizView extends React.Component {
             type="text"
             className="col-sm-9 form-control quiz-answer-input"
             placeholder="Input Answer !"
+            value={this.state.answer}
             onChange={(event) => {
               this.onChange(event.target.value)
             }}
