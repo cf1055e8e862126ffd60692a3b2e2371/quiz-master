@@ -1,15 +1,24 @@
 import { connect } from 'react-redux'
 import NewQuestion from './new-question.jsx'
 import { startAddQuestionCommand } from '../../actions/question'
+import getCommandId from '../../helpers/get-command-id'
+
+const mapStateToProps = state => (
+  {
+    command: state.command,
+  }
+)
 
 const mapDispatchToProps = dispatch => ({
   addQuestion: ({ content, answer }) => {
-    dispatch(startAddQuestionCommand({ content, answer }))
+    const commandId = getCommandId()
+    dispatch(startAddQuestionCommand(commandId, { content, answer }))
+    return commandId
   },
 })
 
 const NewQuestionContainer = connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 )(NewQuestion)
 

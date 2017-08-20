@@ -4,18 +4,29 @@ import {
   startUpdateQuestionCommand,
   startDeleteQuestionCommand,
 } from '../../actions/question'
+import getCommandId from '../../helpers/get-command-id'
+
+const mapStateToProps = state => (
+  {
+    command: state.command,
+  }
+)
 
 const mapDispatchToProps = dispatch => ({
   updateQuestion: ({ id, content, answer }) => {
-    dispatch(startUpdateQuestionCommand({ id, content, answer }))
+    const commandId = getCommandId()
+    dispatch(startUpdateQuestionCommand(commandId, { id, content, answer }))
+    return commandId
   },
   deleteQuestion: (id) => {
-    dispatch(startDeleteQuestionCommand(id))
+    const commandId = getCommandId()
+    dispatch(startDeleteQuestionCommand(commandId, id))
+    return commandId
   },
 })
 
 const QuestionRowContainer = connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 )(QuestionRow)
 

@@ -2,14 +2,34 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
+import COMMAND_STATE from '../../consts/command-state'
 
 class NewQuestion extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+  static get initialState() {
+    return {
       isEditing: false,
       content: '',
       answer: '',
+      commandId: null,
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = NewQuestion.initialState
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const commandId = this.state.commandId
+    if (
+      !commandId ||
+      !nextProps.command[commandId] ||
+      this.props.command[commandId].state !== COMMAND_STATE.REQUESTED
+    ) {
+      return
+    }
+    if (nextProps.command[commandId].state === COMMAND_STATE.SUCCEEDED) {
+      this.setState(NewQuestion.initialState)
     }
   }
 
@@ -18,18 +38,15 @@ class NewQuestion extends React.Component {
   }
 
   onCancel() {
-    this.setState({
-      isEditing: false,
-      content: '',
-      answer: '',
-    })
+    this.setState(NewQuestion.initialState)
   }
 
   onSend() {
-    this.props.addQuestion({
+    const commandId = this.props.addQuestion({
       content: this.state.content,
       answer: this.state.answer,
     })
+    this.setState({ commandId })
   }
 
   onChange(key, value) {
@@ -44,6 +61,7 @@ class NewQuestion extends React.Component {
         />
       )
     }
+    return null
   }
 
   getAnswerCell() {
@@ -54,6 +72,7 @@ class NewQuestion extends React.Component {
         />
       )
     }
+    return null
   }
 
   getButtons() {
@@ -98,6 +117,7 @@ class NewQuestion extends React.Component {
 }
 
 NewQuestion.propTypes = {
+  command: PropTypes.object.isRequired,
   addQuestion: PropTypes.func.isRequired,
 }
 

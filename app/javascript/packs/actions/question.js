@@ -1,4 +1,5 @@
-import { startCommand, COMMAND } from './command'
+import { startCommand } from './command'
+import COMMAND_NAME from '../consts/command-name'
 
 export const SET_QUESTIONS = 'SET_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTIONS'
@@ -10,12 +11,12 @@ export const setQuestions = ({ questions }) => ({
   questions,
 })
 
-export const addQuestion = (question) => ({
+export const addQuestion = question => ({
   type: ADD_QUESTION,
   question,
 })
 
-export const updateQuestion = (question) => ({
+export const updateQuestion = question => ({
   type: UPDATE_QUESTION,
   question,
 })
@@ -25,18 +26,24 @@ export const deleteQuestion = id => ({
   id,
 })
 
-export const startGetQuestionsCommand = () => (
-  startCommand(COMMAND.GET_QUESTIONS)
+export const startGetQuestionsCommand = commandId => (
+  startCommand(commandId, COMMAND_NAME.GET_QUESTIONS)
 )
 
-export const startAddQuestionCommand = ({ content, answer }) => (
-  startCommand(COMMAND.ADD_QUESTION, { content, answer })
+export const startAddQuestionCommand = (
+  commandId, { content, answer },
+) => (
+  startCommand(commandId, COMMAND_NAME.ADD_QUESTION, { content, answer })
 )
 
-export const startUpdateQuestionCommand = ({ id, content, answer }) => (
-  startCommand(COMMAND.UPDATE_QUESTION, { id, content, answer })
+export const startUpdateQuestionCommand = (
+  commandId, { id, content, answer },
+) => (
+  startCommand(
+    commandId, COMMAND_NAME.UPDATE_QUESTION, { id, content, answer },
+  )
 )
 
-export const startDeleteQuestionCommand = id => (
-  startCommand(COMMAND.DELETE_QUESTION, id)
+export const startDeleteQuestionCommand = (commandId, id) => (
+  startCommand(commandId, COMMAND_NAME.DELETE_QUESTION, id)
 )

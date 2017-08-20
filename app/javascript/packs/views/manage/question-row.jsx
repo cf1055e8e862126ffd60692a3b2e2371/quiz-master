@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
+import COMMAND_STATE from '../../consts/command-state'
 
 class QuestionRow extends React.Component {
   constructor(props) {
@@ -10,6 +11,21 @@ class QuestionRow extends React.Component {
       isEditing: false,
       content: props.question.content,
       answer: props.question.answer,
+      commandId: null,
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const commandId = this.state.commandId
+    if (
+      !commandId ||
+      !nextProps.command[commandId] ||
+      this.props.command[commandId].state !== COMMAND_STATE.REQUESTED
+    ) {
+      return
+    }
+    if (nextProps.command[commandId].state === COMMAND_STATE.SUCCEEDED) {
+      this.setState({ isEditing: false, commandId: null })
     }
   }
 
@@ -18,7 +34,8 @@ class QuestionRow extends React.Component {
   }
 
   onDelete() {
-    this.props.deleteQuestion(this.props.question.id)
+    const commandId = this.props.deleteQuestion(this.props.question.id)
+    this.setState({ commandId })
   }
 
   onCancel() {
@@ -30,11 +47,12 @@ class QuestionRow extends React.Component {
   }
 
   onSend() {
-    this.props.updateQuestion({
+    const commandId = this.props.updateQuestion({
       id: this.props.question.id,
       content: this.state.content,
       answer: this.state.answer,
     })
+    this.setState({ commandId })
   }
 
   onChange(key, value) {
@@ -115,6 +133,7 @@ QuestionRow.propTypes = {
     content: PropTypes.string,
     answer: PropTypes.string,
   }).isRequired,
+  command: PropTypes.object.isRequired,
   updateQuestion: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
 }

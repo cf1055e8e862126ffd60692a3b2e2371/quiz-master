@@ -1,31 +1,23 @@
 export const START_COMMAND = 'START_COMMAND'
 export const SUCCESS_COMMAND = 'SUCCESS_COMMAND'
 export const FAIL_COMMAND = 'FAIL_COMMAND'
-export const COMMAND = {
-  GET_QUESTIONS: 'COMMAND.GET_QUESTIONS',
-  ADD_QUESTION: 'COMMAND.ADD_QUESTION',
-  UPDATE_QUESTION: 'COMMAND.UPDATE_QUESTION',
-  DELETE_QUESTION: 'COMMAND.DELETE_QUESTION',
-}
-export const STATE = {
-  REQUESTED: 'REQUESTED',
-  SUCCEEDED: 'SUCCEEDED',
-  FAILED: 'FAILED',
-}
 
-export const startCommand = (name, params) => ({
+export const startCommand = (commandId, name, params) => ({
   type: START_COMMAND,
+  commandId,
   name,
   params,
 })
 
-export const successCommand = name => ({
+export const successCommand = (commandId, name) => ({
   type: SUCCESS_COMMAND,
+  commandId,
   name,
 })
 
-export const failCommand = (name, error) => ({
+export const failCommand = (commandId, name, error) => ({
   type: FAIL_COMMAND,
+  commandId,
   name,
   error,
 })

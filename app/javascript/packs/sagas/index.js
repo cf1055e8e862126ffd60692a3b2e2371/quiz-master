@@ -1,6 +1,7 @@
 import { takeEvery, fork } from 'redux-saga/effects'
 
-import { START_COMMAND, COMMAND } from '../actions/command'
+import { START_COMMAND } from '../actions/command'
+import COMMAND_NAME from '../consts/command-name'
 import {
   getQuestionsSaga,
   addQuestionSaga,
@@ -9,14 +10,14 @@ import {
 } from './question'
 
 const sagaMap = {
-  [COMMAND.GET_QUESTIONS]: getQuestionsSaga,
-  [COMMAND.ADD_QUESTION]: addQuestionSaga,
-  [COMMAND.UPDATE_QUESTION]: updateQuestionSaga,
-  [COMMAND.DELETE_QUESTION]: deleteQuestionSaga,
+  [COMMAND_NAME.GET_QUESTIONS]: getQuestionsSaga,
+  [COMMAND_NAME.ADD_QUESTION]: addQuestionSaga,
+  [COMMAND_NAME.UPDATE_QUESTION]: updateQuestionSaga,
+  [COMMAND_NAME.DELETE_QUESTION]: deleteQuestionSaga,
 }
 
-function* startCommand(action) {
-  yield sagaMap[action.name](action.name, action.params)
+function* startCommand({ name, commandId, params }) {
+  yield sagaMap[name](commandId, name, params)
 }
 
 export default function* () {

@@ -2,37 +2,41 @@ import {
   START_COMMAND,
   SUCCESS_COMMAND,
   FAIL_COMMAND,
-  STATE,
 } from '../actions/command'
+import COMMAND_STATE from '../consts/command-state'
 
 /**
- * It returns properties of each commands, for example:
+ * It returns properties of each commands.
+ * For example:
  * 
  * ```
  * {
- *    COMMAND_GET_QUESTIONS: {
+ *    [commandId1]: {
+ *      name: COMMAND_GET_QUESTIONS
  *      state: 'FAILED',
  *      error: 'hogehoge'
  *    },
- *    COMMAND_ADD_QUESTION: {
+ *    [commandId2]: {
+ *      name: COMMAND_ADD_QUESTION
  *      state: 'REQUESTED',
  *    }
  * }
  * ```
  */
-const command = (state = {}, action) => {
-  const assignAction = params => (
-    Object.assign({}, state, {
-      [action.name]: params,
-    })
-  )
-  switch (action.type) {
+const command = (state = {}, { type, commandId, name, error }) => {
+  const assignNewCommand = (assignParams) => {
+    const newCommand = {
+      [commandId]: Object.assign({ name }, assignParams),
+    }
+    return Object.assign({}, state, newCommand)
+  }
+  switch (type) {
     case START_COMMAND:
-      return assignAction({ state: STATE.REQUESTED })
+      return assignNewCommand({ state: COMMAND_STATE.REQUESTED })
     case SUCCESS_COMMAND:
-      return assignAction({ state: STATE.SUCCEEDED })
+      return assignNewCommand({ state: COMMAND_STATE.SUCCEEDED })
     case FAIL_COMMAND:
-      return assignAction({ state: STATE.FAILED, error: action.error })
+      return assignNewCommand({ state: COMMAND_STATE.FAILED, error })
     default:
       return state
   }
