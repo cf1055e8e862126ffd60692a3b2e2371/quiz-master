@@ -12,10 +12,16 @@ button {
 
 .quiz-prev {
   float: left;
+  position: fixed;
+  top: 50%;
+  left: 10%;
 }
 
 .quiz-next {
   float: right;
+  position: fixed;
+  top: 50%;
+  left: 90%;
 }
 
 .quiz-content {

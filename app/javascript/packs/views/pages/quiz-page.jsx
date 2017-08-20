@@ -28,7 +28,10 @@ class QuizPage extends React.Component {
     }
     return (
       <div className="quiz-page">
-        <QuizView question={this.props.questions[this.state.page - 1]} />
+        <QuizView
+          question={this.props.questions[this.state.page - 1]}
+          page={this.state.page}
+        />
         <div
           className="quiz-prev"
           role="button"

@@ -47,7 +47,9 @@ class QuizView extends React.Component {
     return (
       <section className="form-horizontal">
         <div className="form-group">
-          <label className="col-sm-3 control-label">Q.</label>
+          <label className="col-sm-3 control-label">
+            Q{this.props.page}.
+          </label>
           <div className="col-sm-9 quiz-content">
             {this.props.question.content}
           </div>
@@ -78,6 +80,7 @@ class QuizView extends React.Component {
 
 QuizView.propTypes = {
   question: PropTypes.object.isRequired,
+  page: PropTypes.number.isRequired,
 }
 
 export default QuizView
