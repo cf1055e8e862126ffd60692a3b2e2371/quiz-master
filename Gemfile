@@ -52,3 +52,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'foreman'
 
 gem 'bootstrap-sass'
+gem "secure_headers"
