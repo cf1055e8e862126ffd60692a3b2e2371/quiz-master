@@ -1,10 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import toNumber from '../../helpers/to-number'
 
 class QuizView extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState
+  }
+
+  static isCorrectAnswerWord(correct, answer) {
+    const intCorrect = parseInt(correct, 10)
+    if (isNaN(intCorrect)) {
+      return (correct === answer)
+    }
+    return (
+      intCorrect === parseInt(answer, 10) ||
+      intCorrect === toNumber(answer)
+    )
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +43,32 @@ class QuizView extends React.Component {
   }
 
   isCorrectAnswer() {
-    return (this.state.answer === this.props.question.answer)
+    const correctAnswer = this.props.question.answer
+    const userAnswer = this.state.answer
+    if (QuizView.isCorrectAnswerWord(correctAnswer, userAnswer)) {
+      return true
+    }
+    // consider with answer contains a number:
+    // to accept space delimiter of number string on user's answer,
+    // separate three blocks by before and after of number
+    const correctAnswerWords = correctAnswer.split(' ')
+    const numberStringIndex = correctAnswerWords.findIndex(answerWord => (
+      !isNaN(parseInt(answerWord, 10))
+    ))
+    if (numberStringIndex === -1) { return false }
+    const beforeNumber = (
+      correctAnswerWords.slice(0, numberStringIndex).join(' ')
+    )
+    if (!userAnswer.startsWith(beforeNumber)) { return false }
+    let candidate = userAnswer.slice(beforeNumber.length)
+    const afterNumber = (
+      correctAnswerWords.slice(numberStringIndex + 1).join(' ')
+    )
+    if (!candidate.endsWith(afterNumber)) { return false }
+    candidate = candidate.slice(0, candidate.length - afterNumber.length)
+    return QuizView.isCorrectAnswerWord(
+      correctAnswerWords[numberStringIndex], candidate
+    )
   }
 
   get answerResult() {
