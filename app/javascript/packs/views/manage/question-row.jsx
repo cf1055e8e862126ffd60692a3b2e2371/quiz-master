@@ -69,7 +69,7 @@ class QuestionRow extends React.Component {
         />
       )
     }
-    return currentContent
+    return <div dangerouslySetInnerHTML={{ __html: currentContent }} />
   }
 
   getAnswerCell() {

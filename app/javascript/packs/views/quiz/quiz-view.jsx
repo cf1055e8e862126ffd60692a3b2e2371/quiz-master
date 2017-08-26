@@ -88,7 +88,11 @@ class QuizView extends React.Component {
             Q{this.props.page}.
           </div>
           <div className="col-sm-9 quiz-content">
-            {this.props.question.content}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: this.props.question.content,
+              }}
+            />
           </div>
         </div>
         <div className="form-group">
