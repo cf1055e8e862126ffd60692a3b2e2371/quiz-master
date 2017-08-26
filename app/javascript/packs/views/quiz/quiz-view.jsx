@@ -84,7 +84,7 @@ class QuizView extends React.Component {
     return (
       <section className="form-horizontal">
         <div className="form-group">
-          <div className="col-sm-3 control-label">
+          <div className="col-sm-3 control-label quiz-header">
             Q{this.props.page}.
           </div>
           <div className="col-sm-9 quiz-content">
@@ -96,7 +96,7 @@ class QuizView extends React.Component {
           </div>
         </div>
         <div className="form-group">
-          <div className="col-sm-3 control-label">A.</div>
+          <div className="col-sm-3 control-label quiz-header">A.</div>
           <input
             type="text"
             className="col-sm-9 form-control quiz-answer-input"
