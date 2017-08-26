@@ -2,6 +2,10 @@
   top: 50%;
   position: fixed;
   font-size: xx-large;
+  &.disabled {
+    color: #CCCCCC;
+    cursor: text;
+  }
 }
 
 .quiz-page {
