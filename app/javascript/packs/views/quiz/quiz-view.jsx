@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import AnswerResult from './answer-result'
 import toNumber from '../../helpers/to-number'
 
 class QuizView extends React.Component {
@@ -52,15 +53,6 @@ class QuizView extends React.Component {
     this.setState({
       isCorrect: this.isCorrectAnswer(),
     })
-  }
-
-  get answerResult() {
-    if (this.state.isCorrect === true) {
-      return 'Correct !'
-    } else if (this.state.isCorrect === false) {
-      return 'Incorrect !'
-    }
-    return ''
   }
 
   isCorrectAnswer() {
@@ -120,11 +112,11 @@ class QuizView extends React.Component {
           />
         </div>
         <div className="quiz-answer-button-container">
+          <AnswerResult isCorrect={this.state.isCorrect} />
           <button
             className="btn btn-primary quiz-answer-button"
             onClick={() => { this.onClickCheck() }}
           >Check</button>
-          <div className="quiz-answer-result">{this.answerResult}</div>
         </div>
       </section>
     )

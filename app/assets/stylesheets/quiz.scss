@@ -53,4 +53,16 @@
 
 .quiz-answer-result {
   height: 50px;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.quiz-answer-result-correct {
+  @extend .quiz-answer-result;
+  color: #009900;
+}
+
+.quiz-answer-result-incorrect {
+  @extend .quiz-answer-result;
+  color: #FF0000;
 }
