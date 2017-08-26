@@ -25,7 +25,10 @@ RSpec.describe "Questions", type: :request do
   describe "GET /api/questions" do
     context 'when valid request' do
       let(:json_expected) do
-        @questions.map do |question|
+        sorted_questions = @questions.sort_by do |question|
+          question.created_at
+        end
+        sorted_questions.map do |question|
           {
             'id' => question.id,
             'content' => question.content,

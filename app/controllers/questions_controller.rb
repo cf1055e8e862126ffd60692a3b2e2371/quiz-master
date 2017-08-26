@@ -6,7 +6,7 @@ class QuestionsController < ApiController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.order('created_at')
   end
 
   # GET /questions/1
