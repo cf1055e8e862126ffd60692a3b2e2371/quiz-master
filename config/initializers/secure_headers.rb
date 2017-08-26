@@ -13,7 +13,7 @@ else
   SecureHeaders::Configuration.default do |config|
     config.csp = {
       default_src: %w('none'),
-      script_src: %w('self'),
+      script_src: %w('self' 'unsafe-eval'),
       connect_src: %w('self'),
       style_src: %w('self'),
       img_src: %w('self' data:),
