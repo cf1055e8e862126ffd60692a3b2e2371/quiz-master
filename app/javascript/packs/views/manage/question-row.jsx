@@ -62,42 +62,38 @@ class QuestionRow extends React.Component {
     this.setState({ [key]: value })
   }
 
-  getContentCell() {
-    const currentContent = this.state.content
-    if (this.state.isEditing) {
-      return (
-        <ContentInput
-          defaultValue={currentContent}
-          onChange={(value) => { this.onChange('content', value) }}
-        />
-      )
-    }
-    return <div dangerouslySetInnerHTML={{ __html: currentContent }} />
-  }
-
-  getAnswerCell() {
-    const currentAnswer = this.state.answer
-    if (this.state.isEditing) {
-      return (
-        <AnswerInput
-          defaultValue={currentAnswer}
-          onChange={(value) => { this.onChange('answer', value) }}
-        />
-      )
-    }
-    return currentAnswer
-  }
-
-  getButtons() {
-    if (this.state.isEditing) {
-      return (
-        <EditingButtons
-          onSend={() => { this.onSend() }}
-          onCancel={() => { this.onCancel() }}
-        />
-      )
-    }
+  getRow(contentCell, answerCell, buttonCell) {
     return (
+      <tr>
+        <td>{this.props.order}</td>
+        <td>{contentCell}</td>
+        <td>{answerCell}</td>
+        <td>{buttonCell}</td>
+      </tr>
+    )
+  }
+
+  get editingView() {
+    return this.getRow(
+      <ContentInput
+        defaultValue={this.state.content}
+        onChange={(value) => { this.onChange('content', value) }}
+      />,
+      <AnswerInput
+        defaultValue={this.state.answer}
+        onChange={(value) => { this.onChange('answer', value) }}
+      />,
+      <EditingButtons
+        onSend={() => { this.onSend() }}
+        onCancel={() => { this.onCancel() }}
+      />,
+    )
+  }
+
+  get initialView() {
+    return this.getRow(
+      <div dangerouslySetInnerHTML={{ __html: this.state.content }} />,
+      this.state.answer,
       <div>
         <button
           className="btn btn-warning"
@@ -107,18 +103,13 @@ class QuestionRow extends React.Component {
           className="btn btn-danger"
           onClick={() => { this.onDelete() }}
         >Delete</button>
-      </div>
+      </div>,
     )
   }
 
   render() {
     return (
-      <tr>
-        <td>{this.props.order}</td>
-        <td>{this.getContentCell()}</td>
-        <td>{this.getAnswerCell()}</td>
-        <td>{this.getButtons()}</td>
-      </tr>
+      this.state.isEditing ? this.editingView : this.initialView
     )
   }
 }

@@ -55,40 +55,46 @@ class NewQuestion extends React.Component {
     this.setState({ [key]: value })
   }
 
-  get newButton() {
+  get editingView() {
     return (
-      <button
-        className="btn btn-success"
-        onClick={() => { this.onEdit() }}
-      >New Question</button>
+      <div className="manage-new-question">
+        <h5>New Question:</h5>
+        <div className="col-md-1" />
+        <div className="col-md-6">
+          <ContentInput
+            onChange={(value) => { this.onChange('content', value) }}
+          />
+        </div>
+        <div className="col-md-3">
+          <AnswerInput
+            onChange={(value) => { this.onChange('answer', value) }}
+          />
+        </div>
+        <div className="col-md-2">
+          <EditingButtons
+            onSend={() => { this.onSend() }}
+            onCancel={() => { this.onCancel() }}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  get initialView() {
+    return (
+      <div className="manage-new-question">
+        <button
+          className="btn btn-success"
+          onClick={() => { this.onEdit() }}
+        >New Question</button>
+      </div>
     )
   }
 
   render() {
-    if (this.state.isEditing) {
-      return (
-        <div className="manage-new-question">
-          <div className="col-md-1" />
-          <div className="col-md-6">
-            <ContentInput
-              onChange={(value) => { this.onChange('content', value) }}
-            />
-          </div>
-          <div className="col-md-3">
-            <AnswerInput
-              onChange={(value) => { this.onChange('answer', value) }}
-            />
-          </div>
-          <div className="col-md-2">
-            <EditingButtons
-              onSend={() => { this.onSend() }}
-              onCancel={() => { this.onCancel() }}
-            />
-          </div>
-        </div>
-      )
-    }
-    return <div className="manage-new-question">{this.newButton}</div>
+    return (
+      this.state.isEditing ? this.editingView : this.initialView
+    )
   }
 }
 
