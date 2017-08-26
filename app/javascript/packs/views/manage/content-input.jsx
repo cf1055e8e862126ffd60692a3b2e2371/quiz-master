@@ -5,7 +5,6 @@ import ContentInputToolbar from './content-input-toolbar'
 
 const ContentInput = ({ onChange, defaultValue }) => (
   <div>
-    <ContentInputToolbar />
     <ContentEditable
       className="form-control manage-content-input"
       html={defaultValue}
@@ -14,6 +13,7 @@ const ContentInput = ({ onChange, defaultValue }) => (
         onChange(value)
       }}
     />
+    <ContentInputToolbar />
   </div>
 )
 

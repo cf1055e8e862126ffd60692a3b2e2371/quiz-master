@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const AnswerInput = ({ onChange, defaultValue }) => (
   <input
     type="text"
-    className="form-control"
+    className="form-control manage-answer-input"
     placeholder="Answer"
     defaultValue={defaultValue}
     onChange={(event) => {

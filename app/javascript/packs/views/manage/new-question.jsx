@@ -53,66 +53,52 @@ class NewQuestion extends React.Component {
     this.setState({ [key]: value })
   }
 
-  getContentCell() {
-    if (this.state.isEditing) {
-      return (
-        <ContentInput
-          onChange={(value) => { this.onChange('content', value) }}
-        />
-      )
-    }
-    return null
+  get editingButtons() {
+    return (
+      <div>
+        <button
+          className="btn btn-primary"
+          onClick={() => { this.onSend() }}
+        >Send</button>
+        <button
+          className="btn btn-default"
+          onClick={() => { this.onCancel() }}
+        >Cancel</button>
+      </div>
+    )
   }
 
-  getAnswerCell() {
-    if (this.state.isEditing) {
-      return (
-        <AnswerInput
-          onChange={(value) => { this.onChange('answer', value) }}
-        />
-      )
-    }
-    return null
-  }
-
-  getButtons() {
-    if (this.state.isEditing) {
-      return (
-        <div>
-          <button
-            className="btn btn-primary"
-            onClick={() => { this.onSend() }}
-          >Send</button>
-          <button
-            className="btn btn-default"
-            onClick={() => { this.onCancel() }}
-          >Cancel</button>
-        </div>
-      )
-    }
+  get newButton() {
     return (
       <button
         className="btn btn-success"
         onClick={() => { this.onEdit() }}
-      >Add</button>
+      >New Question</button>
     )
   }
 
   render() {
     if (this.state.isEditing) {
       return (
-        <table>
-          <tbody>
-            <tr>
-              <td>{this.getContentCell()}</td>
-              <td>{this.getAnswerCell()}</td>
-              <td>{this.getButtons()}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="manage-new-question">
+          <div className="col-md-1" />
+          <div className="col-md-6">
+            <ContentInput
+              onChange={(value) => { this.onChange('content', value) }}
+            />
+          </div>
+          <div className="col-md-3">
+            <AnswerInput
+              onChange={(value) => { this.onChange('answer', value) }}
+            />
+          </div>
+          <div className="col-md-2">
+            {this.editingButtons}
+          </div>
+        </div>
       )
     }
-    return <div>{this.getButtons()}</div>
+    return <div className="manage-new-question">{this.newButton}</div>
   }
 }
 

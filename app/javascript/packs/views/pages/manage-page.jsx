@@ -12,15 +12,15 @@ class ManagePage extends React.Component {
   render() {
     if (!this.props.questions) { return <div /> }
     return (
-      <div>
+      <div className="manage-page">
         <NewQuestion />
         <table className="table">
           <thead>
             <tr>
-              <th>Index</th>
-              <th>Content</th>
-              <th>Answer</th>
-              <th />
+              <th className="col-md-1">Index</th>
+              <th className="col-md-6">Content</th>
+              <th className="col-md-3">Answer</th>
+              <th className="col-md-2"/>
             </tr>
           </thead>
           <tbody>
