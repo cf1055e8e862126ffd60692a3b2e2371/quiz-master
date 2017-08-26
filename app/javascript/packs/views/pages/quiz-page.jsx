@@ -34,7 +34,7 @@ class QuizPage extends React.Component {
       return <div>There are no questions!</div>
     }
     return (
-      <div className="quiz-page">
+      <div className="quiz-page center-block">
         <QuizView
           question={this.props.questions[this.state.page - 1]}
           page={this.state.page}

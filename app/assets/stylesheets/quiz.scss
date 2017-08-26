@@ -9,7 +9,8 @@
 }
 
 .quiz-page {
-  margin: 30px 20px;
+  margin-top: 30px;
+  width: 80%;
 }
 
 .quiz-header {
@@ -19,13 +20,13 @@
 .quiz-prev {
   @include paging-arrow;
   float: left;
-  left: 10%;
+  left: 5%;
 }
 
 .quiz-next {
   @include paging-arrow;
   float: right;
-  left: 90%;
+  left: 95%;
 }
 
 .quiz-content {
@@ -33,12 +34,10 @@
     top: 10px;
     bottom: 30px;
   }
-  width: 50%;
   font-size: 2em;
 }
 
 .quiz-answer-input {
-  width: 50%;
   height: 60px;
   font-size: x-large;
 }

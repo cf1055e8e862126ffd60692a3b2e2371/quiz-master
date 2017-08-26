@@ -88,10 +88,10 @@ class QuizView extends React.Component {
     return (
       <section className="form-horizontal">
         <div className="form-group">
-          <div className="col-sm-3 control-label quiz-header">
+          <div className="col-sm-1 control-label quiz-header">
             Q{this.props.page}.
           </div>
-          <div className="col-sm-9 quiz-content">
+          <div className="col-sm-11 quiz-content">
             <div
               dangerouslySetInnerHTML={{
                 __html: this.props.question.content,
@@ -100,16 +100,18 @@ class QuizView extends React.Component {
           </div>
         </div>
         <div className="form-group">
-          <div className="col-sm-3 control-label quiz-header">A.</div>
-          <input
-            type="text"
-            className="col-sm-9 form-control quiz-answer-input"
-            placeholder="Input Answer !"
-            value={this.state.answer}
-            onChange={(event) => {
-              this.onChange(event.target.value)
-            }}
-          />
+          <div className="col-sm-1 control-label quiz-header">A.</div>
+          <div className="col-sm-11">
+            <input
+              type="text"
+              className="form-control quiz-answer-input"
+              placeholder="Input Answer !"
+              value={this.state.answer}
+              onChange={(event) => {
+                this.onChange(event.target.value)
+              }}
+            />
+          </div>
         </div>
         <div className="quiz-answer-button-container">
           <AnswerResult isCorrect={this.state.isCorrect} />
