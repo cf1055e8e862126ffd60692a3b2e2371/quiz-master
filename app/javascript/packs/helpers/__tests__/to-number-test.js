@@ -173,14 +173,6 @@ describe('double figures', () => {
     })
   })
 
-  // [
-  //   'twenty', 'thirty', 'fourty', 'sixty', 'seventy', 'eighty', 'ninety'
-  // ].forEach((numberStr, i) => {
-  //   test(`accept ${numberStr}`, () => {
-  //     expect(toNumber(numberStr)).toBe((i + 2) * 10)
-  //   })
-  // })
-
   test('accept double figure + single figure', () => {
     expect(toNumber('twenty one')).toBe(21)
   })
