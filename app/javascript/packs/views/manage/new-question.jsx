@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
+import EditingButtons from './editing-buttons'
 import commandStateChangedTo from '../../helpers/command-state-changed-to'
 import COMMAND_STATE from '../../consts/command-state'
 
@@ -54,21 +55,6 @@ class NewQuestion extends React.Component {
     this.setState({ [key]: value })
   }
 
-  get editingButtons() {
-    return (
-      <div>
-        <button
-          className="btn btn-primary"
-          onClick={() => { this.onSend() }}
-        >Send</button>
-        <button
-          className="btn btn-default"
-          onClick={() => { this.onCancel() }}
-        >Cancel</button>
-      </div>
-    )
-  }
-
   get newButton() {
     return (
       <button
@@ -94,7 +80,10 @@ class NewQuestion extends React.Component {
             />
           </div>
           <div className="col-md-2">
-            {this.editingButtons}
+            <EditingButtons
+              onSend={() => { this.onSend() }}
+              onCancel={() => { this.onCancel() }}
+            />
           </div>
         </div>
       )
