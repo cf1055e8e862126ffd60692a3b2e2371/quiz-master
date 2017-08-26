@@ -3,11 +3,6 @@ import PropTypes from 'prop-types'
 import toNumber from '../../helpers/to-number'
 
 class QuizView extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = this.initialState
-  }
-
   static isCorrectAnswerWord(correct, answer) {
     const intCorrect = parseInt(correct, 10)
     if (isNaN(intCorrect)) {
@@ -19,9 +14,21 @@ class QuizView extends React.Component {
     )
   }
 
+  static get initialState() {
+    return {
+      isCorrect: undefined,
+      answer: '',
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = QuizView.initialState
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.question.id !== nextProps.question.id) {
-      this.setState(this.initialState)
+      this.setState(QuizView.initialState)
     }
   }
 
@@ -35,11 +42,13 @@ class QuizView extends React.Component {
     })
   }
 
-  get initialState() {
-    return {
-      isCorrect: undefined,
-      answer: '',
+  get answerResult() {
+    if (this.state.isCorrect === true) {
+      return 'Correct !'
+    } else if (this.state.isCorrect === false) {
+      return 'Incorrect !'
     }
+    return ''
   }
 
   isCorrectAnswer() {
@@ -67,32 +76,23 @@ class QuizView extends React.Component {
     if (!candidate.endsWith(afterNumber)) { return false }
     candidate = candidate.slice(0, candidate.length - afterNumber.length)
     return QuizView.isCorrectAnswerWord(
-      correctAnswerWords[numberStringIndex], candidate
+      correctAnswerWords[numberStringIndex], candidate,
     )
-  }
-
-  get answerResult() {
-    if (this.state.isCorrect === true) {
-      return 'Correct !'
-    } else if (this.state.isCorrect === false) {
-      return 'Incorrect !'
-    }
-    return ''
   }
 
   render() {
     return (
       <section className="form-horizontal">
         <div className="form-group">
-          <label className="col-sm-3 control-label">
+          <div className="col-sm-3 control-label">
             Q{this.props.page}.
-          </label>
+          </div>
           <div className="col-sm-9 quiz-content">
             {this.props.question.content}
           </div>
         </div>
         <div className="form-group">
-          <label className="col-sm-3 control-label">A.</label>
+          <div className="col-sm-3 control-label">A.</div>
           <input
             type="text"
             className="col-sm-9 form-control quiz-answer-input"

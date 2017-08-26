@@ -8,15 +8,15 @@ describe('#isCorrectAnswer', () => {
       <QuizView
         question={{ content: 'hoge', answer: correctAnswer }}
         page={1}
-      />
+      />,
     )
     component.setState({ answer: userAnswer })
     return component
   }
 
-  const subject = (component) => {
-    return component.isCorrectAnswer()
-  }
+  const subject = component => (
+    component.isCorrectAnswer()
+  )
 
   describe('when answer is not a/containing number', () => {
     const COLLECT_ANSWER = 'fuga piyo'
@@ -38,7 +38,7 @@ describe('#isCorrectAnswer', () => {
     test('return true for correct answer (by words)', () => {
       const component = setComponent(
         COLLECT_ANSWER,
-        'one hundred twenty three thousand four hundred fifty six'
+        'one hundred twenty three thousand four hundred fifty six',
       )
       expect(subject(component)).toBe(true)
     })
@@ -51,7 +51,7 @@ describe('#isCorrectAnswer', () => {
     test('return false for not correct answer', () => {
       const component = setComponent(
         COLLECT_ANSWER,
-        'one hundred twenty three thousand four hundred fifty seven'
+        'one hundred twenty three thousand four hundred fifty seven',
       )
       expect(subject(component)).toBe(false)
     })
@@ -63,7 +63,7 @@ describe('#isCorrectAnswer', () => {
     test('return true for correct answer (by words)', () => {
       const component = setComponent(
         COLLECT_ANSWER,
-        'this is thirty two apples'
+        'this is thirty two apples',
       )
       expect(subject(component)).toBe(true)
     })
@@ -76,7 +76,7 @@ describe('#isCorrectAnswer', () => {
     test('return false for not correct answer', () => {
       const component = setComponent(
         COLLECT_ANSWER,
-        'this is thirty one apples'
+        'this is thirty one apples',
       )
       expect(subject(component)).toBe(false)
     })

@@ -75,7 +75,7 @@ describe('[thousands and hundreds]', () => {
     const three9 = 'nine hundred ninety nine'
     expect(toNumber(
       `${three9} trillion ${three9} billion ` +
-      `${three9} million  ${three9} thousand ${three9}`
+      `${three9} million  ${three9} thousand ${three9}`,
     )).toBe(999999999999999)
   })
 
@@ -83,14 +83,14 @@ describe('[thousands and hundreds]', () => {
     const three9 = 'nine hundred ninety nine'
     expect(toNumber(
       `minus             ${three9} trillion ${three9} billion ` +
-      `${three9} million ${three9} thousand ${three9}`
+      `${three9} million ${three9} thousand ${three9}`,
     )).toBe(-999999999999999)
   })
 
   test('not accept quadrillion (max+1 value)', () => {
     expect(isNaN(toNumber('one quadrillion'))).toBe(true)
   })
-  
+
   test('not accept minus quadrillion (max-1 value)', () => {
     expect(isNaN(toNumber('minus one quadrillion'))).toBe(true)
   })
@@ -140,7 +140,7 @@ describe('double figures', () => {
   test('accept singles', () => {
     [
       'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
-      'nine'
+      'nine',
     ].forEach((numberStr, i) => {
       expect(toNumber(numberStr)).toBe((i + 1))
     })
@@ -149,7 +149,7 @@ describe('double figures', () => {
   test('accept teens', () => {
     [
       'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
-      'sixteen', 'seventeen', 'eighteen', 'nineteen'
+      'sixteen', 'seventeen', 'eighteen', 'nineteen',
     ].forEach((numberStr, i) => {
       expect(toNumber(numberStr)).toBe((i + 10))
     })
@@ -158,7 +158,7 @@ describe('double figures', () => {
   test('accept teens', () => {
     [
       'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
-      'sixteen', 'seventeen', 'eighteen', 'nineteen'
+      'sixteen', 'seventeen', 'eighteen', 'nineteen',
     ].forEach((numberStr, i) => {
       expect(toNumber(numberStr)).toBe((i + 10))
     })
@@ -167,7 +167,7 @@ describe('double figures', () => {
   test('accept doubles', () => {
     [
       'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy',
-      'eighty', 'ninety'
+      'eighty', 'ninety',
     ].forEach((numberStr, i) => {
       expect(toNumber(numberStr)).toBe((i + 2) * 10)
     })

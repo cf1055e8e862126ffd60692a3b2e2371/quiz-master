@@ -33,20 +33,22 @@ const NUMBER_GROUP = {
     ninety: 90,
   },
   HUNDRED: {
-    hundred: 100
+    hundred: 100,
   },
-  THOUSANDS: [
-    'thousand', 'million', 'billion', 'trillion'
-  ].reduce((prev, key, index) => (
-    Object.assign({}, prev, { [key]: Math.pow(1000, index + 1) })
-  ), {})
+  THOUSANDS: {
+    thousand: 1000,
+    million: 1000000,
+    billion: 1000000000,
+    trillion: 1000000000000,
+  },
 }
 
 const getValueAndGroup = (numberString) => {
-  for (let key of Object.keys(NUMBER_GROUP)) {
-    if (NUMBER_GROUP[key][numberString] !== undefined) {
-      return [NUMBER_GROUP[key][numberString], key]
-    }
+  const group = Object.keys(NUMBER_GROUP).find(key => (
+    (NUMBER_GROUP[key][numberString] !== undefined)
+  ))
+  if (group) {
+    return [group[numberString], group]
   }
   return []
 }
@@ -56,7 +58,7 @@ class HundredsValidator {
   constructor() {
     this._groups = []
   }
-  
+
   add(group) {
     this._groups.push(group)
   }
@@ -72,15 +74,15 @@ class ThousandsValidator extends HundredsValidator {
     if (allowEmpty && this._groups.length === 0) { return true }
     return (
       [
-        'SINGLE-DOUBLE', 'SINGLE', 'TEEN', 'DOUBLE'
+        'SINGLE-DOUBLE', 'SINGLE', 'TEEN', 'DOUBLE',
       ].includes(this._groups.join('-'))
     )
   }
 }
 
-const toNumber = (s) => {
-  const lower = s.toLowerCase().trim()
-  const numberStrings = lower.split(/[ \-]+/)
+const toNumber = (str) => {
+  const lower = str.toLowerCase().trim()
+  const numberStrings = lower.split(/[ -]+/)
   if (numberStrings[0] === 'zero' && numberStrings.length === 1) {
     return 0
   }
@@ -91,11 +93,11 @@ const toNumber = (s) => {
   let sum = 0
   let multipliedBy = 1
   let validator = new ThousandsValidator()
-  const isValid = reversedNumberStrings.every((numberString, i) => {
-    let valueAndGroup = getValueAndGroup(numberString)
-    if (valueAndGroup.length != 2) { return false }
-    let value = valueAndGroup[0]
-    let group = valueAndGroup[1]
+  const isValid = reversedNumberStrings.every((numberString) => {
+    const valueAndGroup = getValueAndGroup(numberString)
+    if (valueAndGroup.length !== 2) { return false }
+    const value = valueAndGroup[0]
+    const group = valueAndGroup[1]
     switch (group) {
       case 'THOUSANDS':
         if (
