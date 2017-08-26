@@ -20,7 +20,7 @@ class ManagePage extends React.Component {
               <th className="col-md-1">Index</th>
               <th className="col-md-6">Content</th>
               <th className="col-md-3">Answer</th>
-              <th className="col-md-2"/>
+              <th className="col-md-2" />
             </tr>
           </thead>
           <tbody>
