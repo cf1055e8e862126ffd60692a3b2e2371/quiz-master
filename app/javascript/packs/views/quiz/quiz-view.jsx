@@ -21,15 +21,27 @@ class QuizView extends React.Component {
     }
   }
 
+  static focusInput() {
+    document.querySelector('.quiz-answer-input').focus()
+  }
+
   constructor(props) {
     super(props)
     this.state = QuizView.initialState
+  }
+
+  componentDidMount() {
+    QuizView.focusInput()
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.question.id !== nextProps.question.id) {
       this.setState(QuizView.initialState)
     }
+  }
+
+  componentDidUpdate() {
+    QuizView.focusInput()
   }
 
   onChange(answer) {
