@@ -1,10 +1,4 @@
 const NUMBER_GROUP = {
-  MINUS: {
-    minus: -1,
-  },
-  ZERO: {
-    zero: 0,
-  },
   SINGLE: {
     one: 1,
     two: 2,
@@ -26,7 +20,7 @@ const NUMBER_GROUP = {
     sixteen: 16,
     seventeen: 17,
     eighteen: 18,
-    nignteen: 19,
+    nineteen: 19,
   },
   DOUBLE: {
     twenty: 20,
@@ -41,90 +35,99 @@ const NUMBER_GROUP = {
   HUNDRED: {
     hundred: 100
   },
-  THOUSANDS: {
-    thousand:    1000,
-    million:     1000000,
-    billion:     1000000000,
-    trillion:    1000000000000,
-    quadrillion: 1000000000000000,
+  THOUSANDS: [
+    'thousand', 'million', 'billion', 'trillion'
+  ].reduce((prev, key, index) => (
+    Object.assign({}, prev, { [key]: Math.pow(1000, index + 1) })
+  ), {})
+}
+
+const getValueAndGroup = (numberString) => {
+  for (let key of Object.keys(NUMBER_GROUP)) {
+    if (NUMBER_GROUP[key][numberString] !== undefined) {
+      return [NUMBER_GROUP[key][numberString], key]
+    }
+  }
+  return []
+}
+
+// This class validates figures for HUNDRED ( <figure> HUNDRED )
+class HundredsValidator {
+  constructor() {
+    this._groups = []
+  }
+  
+  add(group) {
+    this._groups.push(group)
+  }
+
+  isValid() {
+    return (this._groups.length === 1 && this._groups[0] === 'SINGLE')
   }
 }
-const numberGroupHelper = {
-  getValueAndGroup: (numberString) => {
-    for (let key of Object.keys(NUMBER_GROUP)) {
-      if (NUMBER_GROUP[key][numberString] !== undefined) {
-        return [NUMBER_GROUP[key][numberString], key]
-      }
-    }
-    return []
-  },
-  nextOf: {
-    MINUS: ['SINGLE', 'TEEN', 'DOUBLE'],
-    ZERO: [],
-    SINGLE: ['HUNDRED', 'THOUSANDS'],
-    TEEN: ['HUNDRED', 'THOUSANDS'],
-    DOUBLE: ['SINGLE', 'HUNDRED', 'THOUSANDS'],
-    HUNDRED: ['SINGLE', 'TEEN', 'DOUBLE', 'THOUSANDS'],
-    THOUSANDS: ['SINGLE', 'TEEN', 'DOUBLE'],
-  },
-  allowTop: group => (!['HUNDRED', 'THOUSANDS'].includes(group)),
-  allowEnd: group => (group !== 'MINUS')
+
+// This class validates figures for THOUSANDS ( <figures> THOUSAND )
+class ThousandsValidator extends HundredsValidator {
+  isValid({ allowEmpty }) {
+    if (allowEmpty && this._groups.length === 0) { return true }
+    return (
+      [
+        'SINGLE-DOUBLE', 'SINGLE', 'TEEN', 'DOUBLE'
+      ].includes(this._groups.join('-'))
+    )
+  }
 }
 
 const toNumber = (s) => {
-  const lower = s.toLowerCase()
-  const separatedStringNumbers = lower.replace(/ /g, '-').split('-')
-  let headNumber
+  const lower = s.toLowerCase().trim()
+  const numberStrings = lower.split(/[ \-]+/)
+  if (numberStrings[0] === 'zero' && numberStrings.length === 1) {
+    return 0
+  }
+  const isMinus = (numberStrings[0] === 'minus')
+  const reversedNumberStrings = (
+    isMinus ? numberStrings.slice(1) : numberStrings
+  ).reverse()
   let sum = 0
-  let allowHundred = true
-  let allowUnder = Number.MAX_SAFE_INTEGER
-  let preGroup
-  for (let sNum of separatedStringNumbers) {
-    let valueAndGroup = numberGroupHelper.getValueAndGroup(sNum)
+  let multipliedBy = 1
+  let validator = new ThousandsValidator()
+  const isValid = reversedNumberStrings.every((numberString, i) => {
+    let valueAndGroup = getValueAndGroup(numberString)
+    if (valueAndGroup.length != 2) { return false }
     let value = valueAndGroup[0]
     let group = valueAndGroup[1]
-    // 一度出たら、thousandsが出るまで出れない
-    if (!allowHundred && group === 'HUNDRED') { return NaN }
-    // 一度出たthousands以上の値は出れない
-    if (allowUnder <= value) { return NaN }
-    if (!preGroup && !numberGroupHelper.allowTop(group)) {
-      return NaN
-    }
-    if (preGroup && !numberGroupHelper.nextOf[preGroup].includes(group)) {
-      return NaN
-    }
     switch (group) {
-      case 'MINUS':
-        headNumber = value
-        break
-      case 'SINGLE':
-      case 'TEEN':
-      case 'DOUBLE':
-        if (preGroup === 'MINUS') {
-          headNumber = headNumber * value
-        } else if (['HUNDRED', 'THOUSANDS'].includes(preGroup)) {
-          sum += headNumber
-          headNumber = value
-        } else {
-          headNumber = (headNumber === undefined) ? value : headNumber + value
+      case 'THOUSANDS':
+        if (
+          !validator.isValid({ allowEmpty: multipliedBy === 1 }) ||
+          multipliedBy >= value
+        ) {
+          return false
         }
+        validator = new ThousandsValidator()
+        multipliedBy = value
         break
       case 'HUNDRED':
-        allowHundred = false
-        headNumber = headNumber * value
+        if (
+          !validator.isValid({ allowEmpty: true }) ||
+          Math.log10(multipliedBy) % 3 !== 0
+        ) {
+          return false
+        }
+        validator = new HundredsValidator()
+        multipliedBy *= 100
         break
-      case 'THOUSANDS':
-        allowHundred = true
-        allowUnder = value
-        headNumber = headNumber * value
+      default:
+        validator.add(group)
+        sum += (value * multipliedBy)
         break
     }
-    preGroup = group
-  }
-  if (!numberGroupHelper.allowEnd(preGroup)) {
+    return true
+  }, 0)
+  if (!isValid || !validator.isValid({ allowEmpty: false })) {
     return NaN
   }
-  return (headNumber) ? sum + headNumber : sum
+  return (isMinus ? -sum : sum)
 }
 
 export default toNumber

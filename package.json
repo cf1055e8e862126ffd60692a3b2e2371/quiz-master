@@ -2,7 +2,8 @@
   "name": "quiz-master",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .jsx,.js app/javascript/packs/"
+    "lint": "eslint --ext .jsx,.js app/javascript/packs/",
+    "test": "jest --config=jest.json"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
@@ -45,11 +46,15 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "^7.2.1",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.6.1",
     "webpack-dev-server": "^2.7.1"
   }
 }
