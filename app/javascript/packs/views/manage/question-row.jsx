@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
+import commandStateChangedTo from '../../helpers/command-state-changed-to'
 import COMMAND_STATE from '../../consts/command-state'
 
 class QuestionRow extends React.Component {
@@ -17,15 +18,15 @@ class QuestionRow extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const commandId = this.state.commandId
-    if (
-      !commandId ||
-      !nextProps.command[commandId] ||
-      this.props.command[commandId].state !== COMMAND_STATE.REQUESTED
-    ) {
-      return
-    }
-    if (nextProps.command[commandId].state === COMMAND_STATE.SUCCEEDED) {
+    const stateChangedTo = commandStateChangedTo({
+      commandId,
+      currentCommand: this.props.command,
+      nextCommand: nextProps.command,
+    })
+    if (stateChangedTo === COMMAND_STATE.SUCCEEDED) {
       this.setState({ isEditing: false, commandId: null })
+    } else if (stateChangedTo === COMMAND_STATE.FAILED) {
+      alert('Fail to update question')
     }
   }
 
@@ -34,6 +35,7 @@ class QuestionRow extends React.Component {
   }
 
   onDelete() {
+    if (!confirm('Delete this question, OK ?')) { return }
     const commandId = this.props.deleteQuestion(this.props.question.id)
     this.setState({ commandId })
   }
