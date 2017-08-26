@@ -21,7 +21,7 @@ class QuizPage extends React.Component {
   }
 
   prevIsDisabled() {
-    return this.state.page === 1    
+    return this.state.page === 1
   }
 
   prevPage() {
@@ -42,14 +42,14 @@ class QuizPage extends React.Component {
         <PagingButton
           className="quiz-prev"
           disabled={this.prevIsDisabled()}
-          onClick={() => {this.prevPage()}}
+          onClick={() => { this.prevPage() }}
         >
           <span className="glyphicon glyphicon-chevron-left" />
         </PagingButton>
         <PagingButton
           className="quiz-next"
           disabled={this.nextIsDisabled()}
-          onClick={() => {this.nextPage()}}
+          onClick={() => { this.nextPage() }}
         >
           <span className="glyphicon glyphicon-chevron-right" />
         </PagingButton>

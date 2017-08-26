@@ -9,4 +9,4 @@ const validateQuestion = ({ content, answer }) => {
   return errors
 }
 
-export default validateQuestion;
+export default validateQuestion

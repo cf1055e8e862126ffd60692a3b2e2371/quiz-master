@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const PagingButton = ({ className, onClick, disabled, children }) => {
-  const classes = [ className ]
+  const classes = [className]
   if (disabled) {
     classes.push('disabled')
   }

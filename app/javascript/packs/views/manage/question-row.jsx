@@ -44,7 +44,7 @@ class QuestionRow extends React.Component {
   onSend() {
     const errors = validateQuestion({
       content: this.state.content,
-      answer: this.state.answer
+      answer: this.state.answer,
     })
     if (Object.keys(errors).length > 0) {
       this.setState({ errors })
