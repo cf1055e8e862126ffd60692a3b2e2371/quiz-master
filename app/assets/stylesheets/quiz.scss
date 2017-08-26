@@ -1,0 +1,52 @@
+@mixin paging-arrow {
+  top: 50%;
+  position: fixed;
+  font-size: xx-large;
+}
+
+.quiz-page {
+  margin: 30px 20px;
+}
+
+.quiz-header {
+  font-size: xx-large;
+}
+
+.quiz-prev {
+  @include paging-arrow;
+  float: left;
+  left: 10%;
+}
+
+.quiz-next {
+  @include paging-arrow;
+  float: right;
+  left: 90%;
+}
+
+.quiz-content {
+  padding: {
+    top: 10px;
+    bottom: 30px;
+  }
+  width: 50%;
+  font-size: 2em;
+}
+
+.quiz-answer-input {
+  width: 50%;
+  height: 60px;
+  font-size: x-large;
+}
+
+.quiz-answer-button-container {
+  text-align: center;
+}
+
+.quiz-answer-button {
+  font-size: x-large;
+}
+
+.quiz-answer-result {
+  height: 50px;
+}

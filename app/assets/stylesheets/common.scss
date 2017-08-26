@@ -1,0 +1,9 @@
+@for $i from 0 through 4 {
+  h#{$i + 1} {
+    font-size: 200% - ($i * 20);
+  }
+}
+
+button {
+  margin: 5px;
+}
