@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
 import EditingButtons from './editing-buttons'
+import validateQuestion from '../../validators/validate-question'
 import commandStateChangedTo from '../../helpers/command-state-changed-to'
 import COMMAND_STATE from '../../consts/command-state'
 
@@ -13,6 +14,7 @@ class NewQuestion extends React.Component {
       content: '',
       answer: '',
       commandId: null,
+      errors: {},
     }
   }
 
@@ -44,6 +46,14 @@ class NewQuestion extends React.Component {
   }
 
   onSend() {
+    const errors = validateQuestion({
+      content: this.state.content,
+      answer: this.state.answer,
+    })
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors })
+      return
+    }
     const commandId = this.props.addQuestion({
       content: this.state.content,
       answer: this.state.answer,
@@ -63,11 +73,13 @@ class NewQuestion extends React.Component {
         <div className="col-md-6">
           <ContentInput
             onChange={(value) => { this.onChange('content', value) }}
+            error={this.state.errors.content}
           />
         </div>
         <div className="col-md-3">
           <AnswerInput
             onChange={(value) => { this.onChange('answer', value) }}
+            error={this.state.errors.answer}
           />
         </div>
         <div className="col-md-2">

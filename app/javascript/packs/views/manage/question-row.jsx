@@ -3,18 +3,14 @@ import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
 import EditingButtons from './editing-buttons'
+import validateQuestion from '../../validators/validate-question'
 import commandStateChangedTo from '../../helpers/command-state-changed-to'
 import COMMAND_STATE from '../../consts/command-state'
 
 class QuestionRow extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isEditing: false,
-      content: props.question.content,
-      answer: props.question.answer,
-      commandId: null,
-    }
+    this.state = this.initialState
   }
 
   componentWillReceiveProps(nextProps) {
@@ -42,14 +38,18 @@ class QuestionRow extends React.Component {
   }
 
   onCancel() {
-    this.setState({
-      isEditing: false,
-      content: this.props.question.content,
-      answer: this.props.question.answer,
-    })
+    this.setState(this.initialState)
   }
 
   onSend() {
+    const errors = validateQuestion({
+      content: this.state.content,
+      answer: this.state.answer
+    })
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors })
+      return
+    }
     const commandId = this.props.updateQuestion({
       id: this.props.question.id,
       content: this.state.content,
@@ -60,6 +60,16 @@ class QuestionRow extends React.Component {
 
   onChange(key, value) {
     this.setState({ [key]: value })
+  }
+
+  get initialState() {
+    return {
+      isEditing: false,
+      content: this.props.question.content,
+      answer: this.props.question.answer,
+      commandId: null,
+      errors: {},
+    }
   }
 
   getRow(contentCell, answerCell, buttonCell) {
@@ -78,10 +88,12 @@ class QuestionRow extends React.Component {
       <ContentInput
         defaultValue={this.state.content}
         onChange={(value) => { this.onChange('content', value) }}
+        error={this.state.errors.content}
       />,
       <AnswerInput
         defaultValue={this.state.answer}
         onChange={(value) => { this.onChange('answer', value) }}
+        error={this.state.errors.answer}
       />,
       <EditingButtons
         onSend={() => { this.onSend() }}
