@@ -1,11 +1,14 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import EditingButtons from '../editing-buttons'
+import QuestionRowButtons from '../question-row-buttons'
 
 describe('#render', () => {
   it('should show snapshot', () => {
     const component = renderer.create(
-      <EditingButtons onClickSend={() => {}} onClickCancel={() => {}} />,
+      <QuestionRowButtons
+        onClickEdit={() => {}}
+        onClickDelete={() => {}}
+      />,
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
