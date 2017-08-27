@@ -22,7 +22,6 @@ const isCorrectStrOrInt = (correctAnswer, judgedAnswer) => {
     intCorrectAnswer === strictParseInt(trimedAnswer) ||
     intCorrectAnswer === toNumber(trimedAnswer)
   )
-  return dbgIsCorrect
 }
 
 /**
