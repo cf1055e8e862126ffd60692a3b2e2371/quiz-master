@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import AnswerResult from './answer-result'
 import QuestionContent from './question-content'
 import QuestionAnswer from './question-answer'
+import ShowAnswerButton from './show-answer-button'
 import isCorrectAnswer from '../../helpers/is-correct-answer'
 
 class QuizBody extends React.Component {
@@ -37,7 +38,7 @@ class QuizBody extends React.Component {
     })
   }
 
-  get button() {
+  renderButton() {
     if (this.state.isCorrect === true && this.props.moveNextPage) {
       return (
         <button
@@ -57,6 +58,13 @@ class QuizBody extends React.Component {
     )
   }
 
+  renderShowAnswerButton() {
+    if (this.state.isCorrect === false) {
+      return <ShowAnswerButton answer={this.props.question.answer} />
+    }
+    return <div />
+  }
+
   render() {
     return (
       <section className="form-horizontal">
@@ -70,7 +78,8 @@ class QuizBody extends React.Component {
         />
         <div className="quiz-answer-button-container">
           <AnswerResult isCorrect={this.state.isCorrect} />
-          {this.button}
+          {this.renderButton()}
+          {this.renderShowAnswerButton()}
         </div>
       </section>
     )
