@@ -38,6 +38,9 @@ class QuizPage extends React.Component {
         <QuizBody
           question={this.props.questions[this.state.page - 1]}
           page={this.state.page}
+          moveNextPage={
+            this.nextIsDisabled() ? undefined : () => { this.nextPage() }
+          }
         />
         <PagingButton
           className="quiz-prev"

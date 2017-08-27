@@ -37,6 +37,26 @@ class QuizBody extends React.Component {
     })
   }
 
+  get button() {
+    if (this.state.isCorrect === true && this.props.moveNextPage) {
+      return (
+        <button
+          className="btn btn-success quiz-answer-button"
+          onClick={this.props.moveNextPage}
+        >
+          <span className="glyphicon glyphicon-arrow-right" />
+          Next Question
+        </button>
+      )
+    }
+    return (
+      <button
+        className="btn btn-primary quiz-answer-button"
+        onClick={() => { this.onClickCheck() }}
+      >Check</button>
+    )
+  }
+
   render() {
     return (
       <section className="form-horizontal">
@@ -50,10 +70,7 @@ class QuizBody extends React.Component {
         />
         <div className="quiz-answer-button-container">
           <AnswerResult isCorrect={this.state.isCorrect} />
-          <button
-            className="btn btn-primary quiz-answer-button"
-            onClick={() => { this.onClickCheck() }}
-          >Check</button>
+          {this.button}
         </div>
       </section>
     )
@@ -63,6 +80,11 @@ class QuizBody extends React.Component {
 QuizBody.propTypes = {
   question: PropTypes.object.isRequired,
   page: PropTypes.number.isRequired,
+  moveNextPage: PropTypes.func,
+}
+
+QuizBody.defaultProps = {
+  moveNextPage: undefined,
 }
 
 export default QuizBody
