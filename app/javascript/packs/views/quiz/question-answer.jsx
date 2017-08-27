@@ -2,10 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class QuestionAnswer extends React.Component {
-  focusInput() {
-    this.input.focus()
-  }
-
   componentDidMount() {
     this.focusInput()
   }
@@ -20,6 +16,10 @@ class QuestionAnswer extends React.Component {
     }
   }
 
+  focusInput() {
+    this.input.focus()
+  }
+
   render() {
     return (
       <div className="form-group">
@@ -30,16 +30,16 @@ class QuestionAnswer extends React.Component {
             className="form-control quiz-answer-input"
             placeholder="Input Answer !"
             value={this.props.answer}
-            ref={input => { this.input = input }}
+            ref={(input) => { this.input = input }}
             onChange={(event) => {
               this.props.onChange(event.target.value)
             }}
-            onKeyDown={(e) => {this.onKeyDown(e)}}
+            onKeyDown={(e) => { this.onKeyDown(e) }}
           />
         </div>
       </div>
-    )    
-  }  
+    )
+  }
 }
 
 QuestionAnswer.propTypes = {
