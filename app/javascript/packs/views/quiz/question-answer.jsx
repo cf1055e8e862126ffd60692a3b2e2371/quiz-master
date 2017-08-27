@@ -14,6 +14,12 @@ class QuestionAnswer extends React.Component {
     this.focusInput()
   }
 
+  onKeyDown(event) {
+    if (event.keyCode === 13) {
+      this.props.onEnterKey()
+    }
+  }
+
   render() {
     return (
       <div className="form-group">
@@ -28,6 +34,7 @@ class QuestionAnswer extends React.Component {
             onChange={(event) => {
               this.props.onChange(event.target.value)
             }}
+            onKeyDown={(e) => {this.onKeyDown(e)}}
           />
         </div>
       </div>
@@ -38,6 +45,7 @@ class QuestionAnswer extends React.Component {
 QuestionAnswer.propTypes = {
   answer: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onEnterKey: PropTypes.func.isRequired,
 }
 
 export default QuestionAnswer

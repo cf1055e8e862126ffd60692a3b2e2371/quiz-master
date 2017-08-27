@@ -75,6 +75,7 @@ class QuizBody extends React.Component {
         <QuestionAnswer
           answer={this.state.answer}
           onChange={value => this.onChange(value)}
+          onEnterKey={() => { this.onClickCheck() }}
         />
         <div className="quiz-answer-button-container">
           <AnswerResult isCorrect={this.state.isCorrect} />
