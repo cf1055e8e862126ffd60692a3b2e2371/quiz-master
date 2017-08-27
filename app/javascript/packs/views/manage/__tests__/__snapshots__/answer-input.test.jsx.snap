@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<div>
+  <div>
+    <input
+      className="form-control manage-answer-input"
+      defaultValue=""
+      onChange={[Function]}
+      placeholder="Answer"
+      type="text"
+    />
+  </div>
+  <div
+    className="manage-error-message"
+  >
+    hoge
+  </div>
+</div>
+`;

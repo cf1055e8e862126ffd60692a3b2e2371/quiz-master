@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<button
+  className="btn btn-default"
+  onClick={[Function]}
+  type="button"
+>
+  H1
+</button>
+`;

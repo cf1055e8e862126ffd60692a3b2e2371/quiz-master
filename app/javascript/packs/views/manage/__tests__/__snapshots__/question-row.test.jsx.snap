@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show initial view 1`] = `
+<tr>
+  <td>
+    1
+  </td>
+  <td>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "hoge",
+        }
+      }
+    />
+  </td>
+  <td>
+    fuga
+  </td>
+  <td>
+    <div>
+      <button
+        className="btn btn-warning"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+      <button
+        className="btn btn-danger"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+    </div>
+  </td>
+</tr>
+`;
+
+exports[`when "Cancel" button clicked should show initial view 1`] = `
+<tr>
+  <td>
+    1
+  </td>
+  <td>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "hoge",
+        }
+      }
+    />
+  </td>
+  <td>
+    fuga
+  </td>
+  <td>
+    <QuestionRowButtons
+      onClickDelete={[Function]}
+      onClickEdit={[Function]}
+    />
+  </td>
+</tr>
+`;
+
+exports[`when "Edit" button clicked should show editing view 1`] = `
+<tr>
+  <td>
+    1
+  </td>
+  <td>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "hoge",
+        }
+      }
+    />
+  </td>
+  <td>
+    fuga
+  </td>
+  <td>
+    <QuestionRowButtons
+      onClickDelete={[Function]}
+      onClickEdit={[Function]}
+    />
+  </td>
+</tr>
+`;

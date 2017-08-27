@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show initial view 1`] = `
+<div
+  className="manage-new-question"
+>
+  <button
+    className="btn btn-success"
+    onClick={[Function]}
+  >
+    New Question
+  </button>
+</div>
+`;
+
+exports[`when "Cancel" button clicked should show initial view 1`] = `
+<div
+  className="manage-new-question"
+>
+  <h5>
+    New Question:
+  </h5>
+  <div
+    className="col-md-1"
+  />
+  <div
+    className="col-md-6"
+  >
+    <ContentInput
+      defaultValue=""
+      error=""
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="col-md-3"
+  >
+    <AnswerInput
+      defaultValue=""
+      error=""
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="col-md-2"
+  >
+    <EditingButtons
+      onClickCancel={[Function]}
+      onClickSend={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`when "New Question" button clicked should show editing view 1`] = `
+<div
+  className="manage-new-question"
+>
+  <h5>
+    New Question:
+  </h5>
+  <div
+    className="col-md-1"
+  />
+  <div
+    className="col-md-6"
+  >
+    <ContentInput
+      defaultValue=""
+      error=""
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="col-md-3"
+  >
+    <AnswerInput
+      defaultValue=""
+      error=""
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="col-md-2"
+  >
+    <EditingButtons
+      onClickCancel={[Function]}
+      onClickSend={[Function]}
+    />
+  </div>
+</div>
+`;

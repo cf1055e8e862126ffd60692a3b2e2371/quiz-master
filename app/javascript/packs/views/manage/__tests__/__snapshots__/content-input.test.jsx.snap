@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<div>
+  <div
+    className="form-control manage-content-input"
+    contentEditable={true}
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "hoge",
+      }
+    }
+    onBlur={[Function]}
+    onChange={[Function]}
+    onInput={[Function]}
+  />
+  <div
+    className="btn-toolbar manage-content-toolbar"
+  >
+    <div
+      className="btn-group"
+    >
+      <button
+        className="btn btn-default manage-bold-button"
+        onClick={[Function]}
+        type="button"
+      >
+        B
+      </button>
+      <button
+        className="btn btn-default manage-italic-button"
+        onClick={[Function]}
+        type="button"
+      >
+        I
+      </button>
+    </div>
+    <div
+      className="btn-group"
+    >
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        type="button"
+      >
+        H1
+      </button>
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        type="button"
+      >
+        H2
+      </button>
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        type="button"
+      >
+        H3
+      </button>
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        type="button"
+      >
+        H4
+      </button>
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        type="button"
+      >
+        H5
+      </button>
+    </div>
+    <div
+      className="btn-group"
+    >
+      <button
+        className="btn btn-default"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "#FF0000",
+          }
+        }
+        type="button"
+      >
+        A
+      </button>
+    </div>
+  </div>
+  <div
+    className="manage-error-message"
+  >
+    fuga
+  </div>
+</div>
+`;
