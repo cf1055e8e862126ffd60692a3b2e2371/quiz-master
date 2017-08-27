@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AnswerResult from './answer-result'
+import QuestionContent from './question-content'
+import QuestionAnswer from './question-answer'
 import toNumber from '../../helpers/to-number'
 
 class QuizView extends React.Component {
@@ -22,27 +24,15 @@ class QuizView extends React.Component {
     }
   }
 
-  static focusInput() {
-    document.querySelector('.quiz-answer-input').focus()
-  }
-
   constructor(props) {
     super(props)
     this.state = QuizView.initialState
-  }
-
-  componentDidMount() {
-    QuizView.focusInput()
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.question.id !== nextProps.question.id) {
       this.setState(QuizView.initialState)
     }
-  }
-
-  componentDidUpdate() {
-    QuizView.focusInput()
   }
 
   onChange(answer) {
@@ -87,32 +77,14 @@ class QuizView extends React.Component {
   render() {
     return (
       <section className="form-horizontal">
-        <div className="form-group">
-          <div className="col-sm-1 control-label quiz-header">
-            Q{this.props.page}.
-          </div>
-          <div className="col-sm-11 quiz-content">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: this.props.question.content,
-              }}
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-1 control-label quiz-header">A.</div>
-          <div className="col-sm-11">
-            <input
-              type="text"
-              className="form-control quiz-answer-input"
-              placeholder="Input Answer !"
-              value={this.state.answer}
-              onChange={(event) => {
-                this.onChange(event.target.value)
-              }}
-            />
-          </div>
-        </div>
+        <QuestionContent
+          content={this.props.question.content}
+          page={this.props.page}
+        />
+        <QuestionAnswer
+          answer={this.state.answer}
+          onChange={value => this.onChange(value)}
+        />
         <div className="quiz-answer-button-container">
           <AnswerResult isCorrect={this.state.isCorrect} />
           <button
