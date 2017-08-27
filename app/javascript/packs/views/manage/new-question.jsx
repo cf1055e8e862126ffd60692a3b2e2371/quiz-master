@@ -84,8 +84,8 @@ class NewQuestion extends React.Component {
         </div>
         <div className="col-md-2">
           <EditingButtons
-            onSend={() => { this.onSend() }}
-            onCancel={() => { this.onCancel() }}
+            onClickSend={() => { this.onSend() }}
+            onClickCancel={() => { this.onCancel() }}
           />
         </div>
       </div>

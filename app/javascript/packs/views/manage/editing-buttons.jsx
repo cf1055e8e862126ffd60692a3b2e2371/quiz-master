@@ -1,22 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const EditingButtons = ({ onSend, onCancel }) => (
+const EditingButtons = ({ onClickSend, onClickCancel }) => (
   <div>
     <button
       className="btn btn-primary"
-      onClick={onSend}
+      onClick={onClickSend}
     >Send</button>
     <button
       className="btn btn-default"
-      onClick={onCancel}
+      onClick={onClickCancel}
     >Cancel</button>
   </div>
 )
 
 EditingButtons.propTypes = {
-  onSend: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  onClickSend: PropTypes.func.isRequired,
+  onClickCancel: PropTypes.func.isRequired,
 }
 
 export default EditingButtons

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ContentInput from './content-input'
 import AnswerInput from './answer-input'
 import EditingButtons from './editing-buttons'
+import QuestionRowButtons from './question-row-buttons'
 import validateQuestion from '../../validators/validate-question'
 import commandStateChangedTo from '../../helpers/command-state-changed-to'
 import COMMAND_STATE from '../../consts/command-state'
@@ -96,8 +97,8 @@ class QuestionRow extends React.Component {
         error={this.state.errors.answer}
       />,
       <EditingButtons
-        onSend={() => { this.onSend() }}
-        onCancel={() => { this.onCancel() }}
+        onClickSend={() => { this.onSend() }}
+        onClickCancel={() => { this.onCancel() }}
       />,
     )
   }
@@ -106,16 +107,10 @@ class QuestionRow extends React.Component {
     return this.getRow(
       <div dangerouslySetInnerHTML={{ __html: this.state.content }} />,
       this.state.answer,
-      <div>
-        <button
-          className="btn btn-warning"
-          onClick={() => { this.onEdit() }}
-        >Edit</button>
-        <button
-          className="btn btn-danger"
-          onClick={() => { this.onDelete() }}
-        >Delete</button>
-      </div>,
+      <QuestionRowButtons
+        onClickEdit={() => { this.onEdit() }}
+        onClickDelete={() => { this.onDelete() }}
+      />,
     )
   }
 
