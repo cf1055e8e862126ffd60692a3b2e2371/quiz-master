@@ -45,10 +45,10 @@ const NUMBER_GROUP = {
 
 const getValueAndGroup = (numberString) => {
   const group = Object.keys(NUMBER_GROUP).find(key => (
-    (NUMBER_GROUP[key][numberString] !== undefined)
+    NUMBER_GROUP[key][numberString] !== undefined
   ))
   if (group) {
-    return [group[numberString], group]
+    return [NUMBER_GROUP[group][numberString], group]
   }
   return []
 }
