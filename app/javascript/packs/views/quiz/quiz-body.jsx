@@ -5,7 +5,7 @@ import QuestionContent from './question-content'
 import QuestionAnswer from './question-answer'
 import toNumber from '../../helpers/to-number'
 
-class QuizView extends React.Component {
+class QuizBody extends React.Component {
   static isCorrectAnswerWord(correct, answer) {
     const intCorrect = parseInt(correct, 10)
     if (isNaN(intCorrect)) {
@@ -26,12 +26,12 @@ class QuizView extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = QuizView.initialState
+    this.state = QuizBody.initialState
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.question.id !== nextProps.question.id) {
-      this.setState(QuizView.initialState)
+      this.setState(QuizBody.initialState)
     }
   }
 
@@ -48,7 +48,7 @@ class QuizView extends React.Component {
   isCorrectAnswer() {
     const correctAnswer = this.props.question.answer
     const userAnswer = this.state.answer
-    if (QuizView.isCorrectAnswerWord(correctAnswer, userAnswer)) {
+    if (QuizBody.isCorrectAnswerWord(correctAnswer, userAnswer)) {
       return true
     }
     // consider with answer contains a number:
@@ -69,7 +69,7 @@ class QuizView extends React.Component {
     )
     if (!candidate.endsWith(afterNumber)) { return false }
     candidate = candidate.slice(0, candidate.length - afterNumber.length)
-    return QuizView.isCorrectAnswerWord(
+    return QuizBody.isCorrectAnswerWord(
       correctAnswerWords[numberStringIndex], candidate,
     )
   }
@@ -97,9 +97,9 @@ class QuizView extends React.Component {
   }
 }
 
-QuizView.propTypes = {
+QuizBody.propTypes = {
   question: PropTypes.object.isRequired,
   page: PropTypes.number.isRequired,
 }
 
-export default QuizView
+export default QuizBody

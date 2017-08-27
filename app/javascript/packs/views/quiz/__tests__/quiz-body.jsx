@@ -1,11 +1,11 @@
 import React from 'react'
 import TestUtils from 'react-dom/test-utils'
-import QuizView from '../quiz-view'
+import QuizBody from '../quiz-body'
 
 describe('#isCorrectAnswer', () => {
   const setComponent = (correctAnswer, userAnswer) => {
     const component = TestUtils.renderIntoDocument(
-      <QuizView
+      <QuizBody
         question={{ content: 'hoge', answer: correctAnswer }}
         page={1}
       />,

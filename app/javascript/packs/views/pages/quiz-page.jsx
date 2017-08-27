@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import QuizView from '../quiz/quiz-view'
+import QuizBody from '../quiz/quiz-body'
 import PagingButton from '../quiz/paging-button'
 
 class QuizPage extends React.Component {
@@ -35,7 +35,7 @@ class QuizPage extends React.Component {
     }
     return (
       <div className="quiz-page center-block">
-        <QuizView
+        <QuizBody
           question={this.props.questions[this.state.page - 1]}
           page={this.state.page}
         />
