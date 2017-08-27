@@ -53,7 +53,11 @@ const getValueAndGroup = (numberString) => {
   return []
 }
 
-// This class validates figures for HUNDRED ( <figure> HUNDRED )
+/**
+ * This class validates number group behind HUNDRED
+ * ex1: one hundred => number group is 'SINGLE', it's valid.
+ * ex2: ten hundred => number group is 'DOUBLE', it's invalid.
+ */
 class HundredsValidator {
   constructor() {
     this._groups = []
@@ -68,7 +72,13 @@ class HundredsValidator {
   }
 }
 
-// This class validates figures for THOUSANDS ( <figures> THOUSAND )
+/**
+ * This class validates number groups between THOUSANDS and HUNDRED
+ * ex1: twenty one thousand => number groups is ['SINGLE', 'DOUBLE'],
+ *      it's valid.
+ * ex2: twenty ten thousand    => number groups is ['TEEN', 'DOUBLE'],
+ *      it's invalid.
+ */
 class ThousandsValidator extends HundredsValidator {
   isValid({ allowEmpty }) {
     if (allowEmpty && this._groups.length === 0) { return true }
@@ -80,6 +90,21 @@ class ThousandsValidator extends HundredsValidator {
   }
 }
 
+/**
+ * It returns a number(int) which is recognized by str.
+ * If it is not recognized as a number, it returns NaN.
+ * 
+ * Range of number is (-999999999999999 to 999999999999999) and
+ * acceptable delimiter in str is hiphen and space.
+ * 
+ * ex:
+ *  toNumber('one thousand two hundred thirty four')
+ *  => 1234
+ *  toNumber('one-thousand-two-hundred-thirty-four')
+ *  => 1234
+ *  toNumber('hoge')
+ *  => NaN
+ */
 const toNumber = (str) => {
   const lower = str.toLowerCase().trim()
   const numberStrings = lower.split(/[ -]+/)
@@ -94,10 +119,8 @@ const toNumber = (str) => {
   let multipliedBy = 1
   let validator = new ThousandsValidator()
   const isValid = reversedNumberStrings.every((numberString) => {
-    const valueAndGroup = getValueAndGroup(numberString)
-    if (valueAndGroup.length !== 2) { return false }
-    const value = valueAndGroup[0]
-    const group = valueAndGroup[1]
+    const [value, group] = getValueAndGroup(numberString)
+    if (!group) { return false }
     switch (group) {
       case 'THOUSANDS':
         if (

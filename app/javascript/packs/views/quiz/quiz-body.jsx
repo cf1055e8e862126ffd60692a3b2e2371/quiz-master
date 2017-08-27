@@ -3,20 +3,9 @@ import PropTypes from 'prop-types'
 import AnswerResult from './answer-result'
 import QuestionContent from './question-content'
 import QuestionAnswer from './question-answer'
-import toNumber from '../../helpers/to-number'
+import isCorrectAnswer from '../../helpers/is-correct-answer'
 
 class QuizBody extends React.Component {
-  static isCorrectAnswerWord(correct, answer) {
-    const intCorrect = parseInt(correct, 10)
-    if (isNaN(intCorrect)) {
-      return (correct === answer)
-    }
-    return (
-      intCorrect === parseInt(answer, 10) ||
-      intCorrect === toNumber(answer)
-    )
-  }
-
   static get initialState() {
     return {
       isCorrect: undefined,
@@ -41,37 +30,11 @@ class QuizBody extends React.Component {
 
   onClickCheck() {
     this.setState({
-      isCorrect: this.isCorrectAnswer(),
+      isCorrect: isCorrectAnswer(
+        this.props.question.answer,
+        this.state.answer,
+      ),
     })
-  }
-
-  isCorrectAnswer() {
-    const correctAnswer = this.props.question.answer
-    const userAnswer = this.state.answer
-    if (QuizBody.isCorrectAnswerWord(correctAnswer, userAnswer)) {
-      return true
-    }
-    // consider with answer contains a number:
-    // to accept space delimiter of number string on user's answer,
-    // separate three blocks by before and after of number
-    const correctAnswerWords = correctAnswer.split(' ')
-    const numberStringIndex = correctAnswerWords.findIndex(answerWord => (
-      !isNaN(parseInt(answerWord, 10))
-    ))
-    if (numberStringIndex === -1) { return false }
-    const beforeNumber = (
-      correctAnswerWords.slice(0, numberStringIndex).join(' ')
-    )
-    if (!userAnswer.startsWith(beforeNumber)) { return false }
-    let candidate = userAnswer.slice(beforeNumber.length)
-    const afterNumber = (
-      correctAnswerWords.slice(numberStringIndex + 1).join(' ')
-    )
-    if (!candidate.endsWith(afterNumber)) { return false }
-    candidate = candidate.slice(0, candidate.length - afterNumber.length)
-    return QuizBody.isCorrectAnswerWord(
-      correctAnswerWords[numberStringIndex], candidate,
-    )
   }
 
   render() {
