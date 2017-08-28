@@ -10,7 +10,7 @@ describe('when questions are undefined', () => {
   })
 })
 
-describe('when questions are not empty', () => {
+describe('when questions are not undefined', () => {
   const createComponent = () => (
     <ManagePage questions={[]} startGetQuestions={() => {}} />
   )
