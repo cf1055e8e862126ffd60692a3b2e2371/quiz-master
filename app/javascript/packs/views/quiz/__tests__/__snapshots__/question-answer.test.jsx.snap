@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<QuestionAnswer
+  answer="hoge"
+  onChange={[Function]}
+  onEnterKey={[Function]}
+>
+  <div
+    className="form-group"
+  >
+    <div
+      className="col-sm-1 control-label quiz-header"
+    >
+      A.
+    </div>
+    <div
+      className="col-sm-11"
+    >
+      <input
+        className="form-control quiz-answer-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Input Answer !"
+        type="text"
+        value="hoge"
+      />
+    </div>
+  </div>
+</QuestionAnswer>
+`;

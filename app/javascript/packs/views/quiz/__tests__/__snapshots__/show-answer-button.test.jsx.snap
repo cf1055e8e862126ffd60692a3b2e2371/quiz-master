@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<div
+  className="quiz-show-answer"
+>
+  <div>
+    <button
+      className="btn btn-warning quiz-answer-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Show Answer
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<section
+  className="form-horizontal"
+>
+  <QuestionContent
+    content="hogehoge"
+    page={2}
+  />
+  <QuestionAnswer
+    answer=""
+    onChange={[Function]}
+    onEnterKey={[Function]}
+  />
+  <div
+    className="quiz-answer-button-container"
+  >
+    <AnswerResult />
+    <button
+      className="btn btn-primary quiz-answer-button"
+      onClick={[Function]}
+    >
+      Check
+    </button>
+    <div />
+  </div>
+</section>
+`;

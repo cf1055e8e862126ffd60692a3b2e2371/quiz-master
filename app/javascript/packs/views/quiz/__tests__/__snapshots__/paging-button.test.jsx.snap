@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<div
+  className="quiz-prev"
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  <span
+    className="glyphicon glyphicon-chevron-left"
+  />
+</div>
+`;

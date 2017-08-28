@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#render should show snapshot 1`] = `
+<div
+  className="form-group"
+>
+  <div
+    className="col-sm-1 control-label quiz-header"
+  >
+    Q
+    1
+    .
+  </div>
+  <div
+    className="col-sm-11 quiz-content"
+  >
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<div>hoge</div>",
+        }
+      }
+    />
+  </div>
+</div>
+`;
