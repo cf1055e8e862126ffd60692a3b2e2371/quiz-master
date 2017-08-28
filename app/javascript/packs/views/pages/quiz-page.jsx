@@ -30,8 +30,10 @@ class QuizPage extends React.Component {
 
   render() {
     if (!this.props.questions) { return <div /> }
-    if (!this.props.questions.length === 0) {
-      return <div>There are no questions!</div>
+    if (this.props.questions.length === 0) {
+      return (
+        <div className="quiz-page-error">There are no questions!</div>
+      )
     }
     return (
       <div className="quiz-page center-block">

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when questions are not empty should show snapshot 1`] = `
+<div
+  className="quiz-page center-block"
+>
+  <QuizBody
+    moveNextPage={[Function]}
+    page={1}
+    question={
+      Object {
+        "answer": "hoge",
+        "content": "hogehoge",
+        "id": 1,
+      }
+    }
+  />
+  <PagingButton
+    className="quiz-prev"
+    disabled={true}
+    onClick={[Function]}
+  >
+    <span
+      className="glyphicon glyphicon-chevron-left"
+    />
+  </PagingButton>
+  <PagingButton
+    className="quiz-next"
+    disabled={false}
+    onClick={[Function]}
+  >
+    <span
+      className="glyphicon glyphicon-chevron-right"
+    />
+  </PagingButton>
+</div>
+`;
