@@ -8,7 +8,7 @@ const createComponent = () => (
   <QuestionRow
     order={1}
     question={{ id: 1, content: 'hoge', answer: 'fuga' }}
-    command={{}}
+    commands={{}}
     updateQuestion={() => {}}
     deleteQuestion={() => {}}
   />
