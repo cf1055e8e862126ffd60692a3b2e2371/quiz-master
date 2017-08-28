@@ -128,7 +128,7 @@ QuestionRow.propTypes = {
     content: PropTypes.string,
     answer: PropTypes.string,
   }).isRequired,
-  command: PropTypes.object.isRequired,
+  commands: PropTypes.object.isRequired,
   updateQuestion: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
 }

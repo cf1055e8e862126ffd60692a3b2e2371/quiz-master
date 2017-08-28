@@ -111,7 +111,7 @@ class NewQuestion extends React.Component {
 }
 
 NewQuestion.propTypes = {
-  command: PropTypes.object.isRequired,
+  commands: PropTypes.object.isRequired,
   addQuestion: PropTypes.func.isRequired,
 }
 

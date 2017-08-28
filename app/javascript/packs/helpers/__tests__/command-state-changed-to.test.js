@@ -34,8 +34,8 @@ describe('when commandId is not defined', () => {
   it('return null', () => {
     expect(
       commandStateChangedTo({
-        currentCommands: CURRENT_COMMANDS, nextCommands: NEXT_COMMANDS
-      })
+        currentCommands: CURRENT_COMMANDS, nextCommands: NEXT_COMMANDS,
+      }),
     ).toBe(null)
   })
 })
@@ -47,7 +47,7 @@ describe('when commandId is not found on currentCommands', () => {
         commandId: 4,
         currentCommands: CURRENT_COMMANDS,
         nextCommands: NEXT_COMMANDS,
-      })
+      }),
     ).toBe(null)
   })
 })
@@ -59,7 +59,7 @@ describe('when commandId is not found on nextCommands', () => {
         commandId: 3,
         currentCommands: CURRENT_COMMANDS,
         nextCommands: NEXT_COMMANDS,
-      })
+      }),
     ).toBe(null)
   })
 })
@@ -71,7 +71,7 @@ describe('when command state is not changed', () => {
         commandId: 2,
         currentCommands: CURRENT_COMMANDS,
         nextCommands: NEXT_COMMANDS,
-      })
+      }),
     ).toBe(null)
   })
 })
@@ -83,7 +83,7 @@ describe('when command state is changed', () => {
         commandId: 1,
         currentCommands: CURRENT_COMMANDS,
         nextCommands: NEXT_COMMANDS,
-      })
+      }),
     ).toBe('SUCCEEDED')
   })
 })

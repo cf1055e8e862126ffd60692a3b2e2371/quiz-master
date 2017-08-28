@@ -5,6 +5,6 @@ it('return different command ids', () => {
   expect(
     commandIds[0] !== commandIds[1] &&
     commandIds[0] !== commandIds[2] &&
-    commandIds[1] !== commandIds[2]
+    commandIds[1] !== commandIds[2],
   ).toBe(true)
 })
