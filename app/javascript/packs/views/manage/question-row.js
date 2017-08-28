@@ -8,7 +8,7 @@ import getCommandId from '../../helpers/get-command-id'
 
 const mapStateToProps = state => (
   {
-    command: state.commands,
+    commands: state.commands,
   }
 )
 
