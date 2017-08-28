@@ -27,8 +27,8 @@ class NewQuestion extends React.Component {
     const commandId = this.state.commandId
     const stateChangedTo = commandStateChangedTo({
       commandId,
-      currentCommand: this.props.command,
-      nextCommand: nextProps.command,
+      currentCommands: this.props.commands,
+      nextCommands: nextProps.commands,
     })
     if (stateChangedTo === COMMAND_STATE.SUCCEEDED) {
       this.setState(NewQuestion.initialState)

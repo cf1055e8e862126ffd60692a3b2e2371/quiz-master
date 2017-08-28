@@ -5,7 +5,7 @@ import getCommandId from '../../helpers/get-command-id'
 
 const mapStateToProps = state => (
   {
-    command: state.command,
+    command: state.commands,
   }
 )
 

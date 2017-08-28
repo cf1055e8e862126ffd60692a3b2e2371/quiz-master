@@ -23,7 +23,7 @@ import COMMAND_STATE from '../consts/command-state'
  * }
  * ```
  */
-const command = (state = {}, { type, commandId, name, error }) => {
+const commands = (state = {}, { type, commandId, name, error }) => {
   const assignNewCommand = (assignParams) => {
     const newCommand = {
       [commandId]: Object.assign({ name }, assignParams),
@@ -42,4 +42,4 @@ const command = (state = {}, { type, commandId, name, error }) => {
   }
 }
 
-export default command
+export default commands

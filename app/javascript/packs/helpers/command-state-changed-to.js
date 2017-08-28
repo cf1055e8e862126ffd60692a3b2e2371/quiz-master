@@ -1,15 +1,15 @@
 const commandStateChangedTo = (
-  { commandId, currentCommand, nextCommand },
+  { commandId, currentCommands, nextCommands },
 ) => {
   if (
     !commandId ||
-    !nextCommand[commandId] ||
-    !currentCommand[commandId] ||
-    currentCommand[commandId].state === nextCommand[commandId].state
+    !nextCommands[commandId] ||
+    !currentCommands[commandId] ||
+    currentCommands[commandId].state === nextCommands[commandId].state
   ) {
     return null
   }
-  return nextCommand[commandId].state
+  return nextCommands[commandId].state
 }
 
 export default commandStateChangedTo
