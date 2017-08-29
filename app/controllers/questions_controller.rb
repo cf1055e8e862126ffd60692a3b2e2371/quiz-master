@@ -16,32 +16,26 @@ class QuestionsController < ApiController
   def create
     @question = Question.new(question_params)
 
-    respond_to do |format|
-      if @question.save
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.save
+      render :show, status: :created, location: @question
+    else
+      render json: @question.errors, status: :unprocessable_entity
     end
   end
 
   # PUT /questions/1
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.update(question_params)
+      render :show, status: :ok, location: @question
+    else
+      render json: @question.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /questions/1
   def destroy
     @question.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
