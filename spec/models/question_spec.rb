@@ -32,7 +32,7 @@ RSpec.describe Question, type: :model do
     end
 
     # acceptable tags
-    %w(div b i h1 h2 h3 h4 h5 font).each do |tag_name|
+    %w(div b i h1 h2 h3 h4 h5 font br).each do |tag_name|
       context "when contains #{tag_name} tag" do
         let(:content) { "hoge<#{tag_name}>fuga</#{tag_name}>" }
         it { is_expected.to be_truthy }

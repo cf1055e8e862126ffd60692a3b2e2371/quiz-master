@@ -23,6 +23,6 @@ class SafeHtmlValidator < ActiveModel::EachValidator
   end
 
   private
-    ACCEPTABLE_ELEMENTS = %w(div b i h1 h2 h3 h4 h5 font).freeze
+    ACCEPTABLE_ELEMENTS = %w(div b i h1 h2 h3 h4 h5 font br).freeze
     ACCEPTABLE_ATTRIBUTES = %w(class color).freeze
 end
