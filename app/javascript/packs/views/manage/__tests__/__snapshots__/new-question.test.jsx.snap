@@ -28,6 +28,7 @@ exports[`when "Cancel" button clicked should show initial view 1`] = `
   >
     <ContentInput
       defaultValue=""
+      disabled={null}
       error=""
       onChange={[Function]}
     />
@@ -37,6 +38,7 @@ exports[`when "Cancel" button clicked should show initial view 1`] = `
   >
     <AnswerInput
       defaultValue=""
+      disabled={null}
       error=""
       onChange={[Function]}
     />
@@ -45,6 +47,7 @@ exports[`when "Cancel" button clicked should show initial view 1`] = `
     className="col-md-2"
   >
     <EditingButtons
+      disabled={null}
       onClickCancel={[Function]}
       onClickSend={[Function]}
     />
@@ -67,6 +70,7 @@ exports[`when "New Question" button clicked should show editing view 1`] = `
   >
     <ContentInput
       defaultValue=""
+      disabled={null}
       error=""
       onChange={[Function]}
     />
@@ -76,6 +80,7 @@ exports[`when "New Question" button clicked should show editing view 1`] = `
   >
     <AnswerInput
       defaultValue=""
+      disabled={null}
       error=""
       onChange={[Function]}
     />
@@ -84,6 +89,7 @@ exports[`when "New Question" button clicked should show editing view 1`] = `
     className="col-md-2"
   >
     <EditingButtons
+      disabled={null}
       onClickCancel={[Function]}
       onClickSend={[Function]}
     />

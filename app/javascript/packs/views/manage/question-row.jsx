@@ -84,21 +84,33 @@ class QuestionRow extends React.Component {
     )
   }
 
+  get disabled() {
+    const commandId = this.state.commandId
+    return (
+      commandId &&
+      this.props.commands[commandId].state === COMMAND_STATE.REQUESTED
+    )
+  }
+
   get editingView() {
+    console.log('disabled?', this.disabled)
     return this.getRow(
       <ContentInput
         defaultValue={this.state.content}
         onChange={(value) => { this.onChange('content', value) }}
         error={this.state.errors.content}
+        disabled={this.disabled}
       />,
       <AnswerInput
         defaultValue={this.state.answer}
         onChange={(value) => { this.onChange('answer', value) }}
         error={this.state.errors.answer}
+        disabled={this.disabled}
       />,
       <EditingButtons
         onClickSend={() => { this.onSend() }}
         onClickCancel={() => { this.onCancel() }}
+        disabled={this.disabled}
       />,
     )
   }

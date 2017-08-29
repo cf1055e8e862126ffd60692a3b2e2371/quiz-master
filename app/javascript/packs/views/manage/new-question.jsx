@@ -65,6 +65,14 @@ class NewQuestion extends React.Component {
     this.setState({ [key]: value })
   }
 
+  get disabled() {
+    const commandId = this.state.commandId
+    return (
+      commandId &&
+      this.props.commands[commandId].state === COMMAND_STATE.REQUESTED
+    )
+  }
+
   get editingView() {
     return (
       <div className="manage-new-question">
@@ -74,18 +82,21 @@ class NewQuestion extends React.Component {
           <ContentInput
             onChange={(value) => { this.onChange('content', value) }}
             error={this.state.errors.content}
+            disabled={this.disabled}
           />
         </div>
         <div className="col-md-3">
           <AnswerInput
             onChange={(value) => { this.onChange('answer', value) }}
             error={this.state.errors.answer}
+            disabled={this.disabled}
           />
         </div>
         <div className="col-md-2">
           <EditingButtons
             onClickSend={() => { this.onSend() }}
             onClickCancel={() => { this.onCancel() }}
+            disabled={this.disabled}
           />
         </div>
       </div>

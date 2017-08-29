@@ -10,6 +10,7 @@ exports[`#render should show snapshot 1`] = `
         "__html": "hoge",
       }
     }
+    disabled={false}
     onBlur={[Function]}
     onChange={[Function]}
     onInput={[Function]}

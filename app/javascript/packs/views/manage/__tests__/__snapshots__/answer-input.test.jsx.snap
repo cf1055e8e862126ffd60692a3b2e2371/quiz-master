@@ -6,6 +6,7 @@ exports[`#render should show snapshot 1`] = `
     <input
       className="form-control manage-answer-input"
       defaultValue=""
+      disabled={false}
       onChange={[Function]}
       placeholder="Answer"
       type="text"
