@@ -30,6 +30,38 @@ RSpec.describe Question, type: :model do
       let(:content) { nil }
       it { is_expected.to be_falsy }
     end
+
+    # acceptable tags
+    %w(div b i h1 h2 h3 h4 h5 font).each do |tag_name|
+      context "when contains #{tag_name} tag" do
+        let(:content) { "hoge<#{tag_name}>fuga</#{tag_name}>" }
+        it { is_expected.to be_truthy }
+      end
+    end
+
+    # not acceptable tags
+    %w(form script iframe).each do |tag_name|
+      context "when contains #{tag_name} tag" do
+        let(:content) { "hoge<#{tag_name}>fuga</#{tag_name}>" }
+        it { is_expected.to be_falsy }
+      end
+    end
+
+    # acceptable attributes
+    %w(class color).each do |attribute|
+      context "when contains #{attribute} attribute" do
+        let(:content) { "hoge<div #{attribute}=\"fuga\" />" }
+        it { is_expected.to be_truthy }
+      end
+    end
+    
+    # not acceptable attributes
+    %w(onmouseover onload onclick).each do |attribute|
+      context "when contains #{attribute} attribute" do
+        let(:content) { "hoge<div #{attribute}=\"fuga\" />" }
+        it { is_expected.to be_falsy }
+      end
+    end
   end
 
   describe '#answer' do
