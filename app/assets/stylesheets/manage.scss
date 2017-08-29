@@ -44,3 +44,18 @@ $manage-input-margin-top: 5px;
   margin-top: 10px;
   color: #FF0000;
 }
+
+@mixin question-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.manage-question-content-preview {
+  @include question-preview;
+  max-width: 500px;
+  max-height: 200px;
+}
+
+.manage-question-answer-preview {
+  max-width: 400px;
+}

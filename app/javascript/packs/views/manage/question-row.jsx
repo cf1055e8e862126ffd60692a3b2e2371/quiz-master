@@ -105,8 +105,13 @@ class QuestionRow extends React.Component {
 
   get initialView() {
     return this.getRow(
-      <div dangerouslySetInnerHTML={{ __html: this.state.content }} />,
-      this.state.answer,
+      <div
+        className="manage-question-content-preview"
+        dangerouslySetInnerHTML={{ __html: this.state.content }}
+      />,
+      <div className="manage-question-answer-preview">
+        {this.state.answer}
+      </div>,
       <QuestionRowButtons
         onClickEdit={() => { this.onEdit() }}
         onClickDelete={() => { this.onDelete() }}
