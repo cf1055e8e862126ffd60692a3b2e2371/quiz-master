@@ -1,24 +1,75 @@
-# README
+# Quiz-Master
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Requirements
 
-Things you may want to cover:
+- Ruby 2.3.4+
+- Node.js 8.1.4+
+- PostgreSQL
+- Bundler
+- yarn
 
-* Ruby version
+### Getting Started
 
-* System dependencies
+1. Install libraries
 
-* Configuration
+```
+$ bundle install --path /vendor/bundle
+$ yarn install
+```
 
-* Database creation
+2. Start PostgreSQL server
 
-* Database initialization
+3. Create databases
 
-* How to run the test suite
+```
+$ bundle exec rake db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+4. Create tables
 
-* Deployment instructions
+```
+$ ./bin/rails db:migrate
+```
 
-* ...
+5. Webpacking
+
+```
+$ ./bin/webpack
+```
+
+6. Start server
+
+```
+$ bundle exec rails s
+```
+
+7. Connect these urls by your web browser
+  - http://localhost:3000/manage (Manage Page)
+  - http://localhost:3000/quiz (Quiz Page)
+
+
+### Development
+
+- Start rails & webpack-dev-server
+
+```
+$ bundle exec foreman start
+```
+
+- Test ruby codes
+
+```
+$ bundle exec rspec
+```
+
+- Test JavaScript codes
+
+```
+$ yarn test
+```
+
+- Run eslint
+
+```
+$ yarn run lint
+```
