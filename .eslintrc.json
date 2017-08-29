@@ -25,6 +25,7 @@
         "import/prefer-default-export": ["warn", "always"],
         "semi": [ "error", "never" ],
         "no-underscore-dangle": [ "error", { "allowAfterThis": true } ],
-        "react/forbid-prop-types": [ 2, { "forbid": ["array", "any"]} ]
+        "react/forbid-prop-types": [ 2, { "forbid": ["array", "any"]} ],
+        "no-alert": [ 0 ]
     }
 }
