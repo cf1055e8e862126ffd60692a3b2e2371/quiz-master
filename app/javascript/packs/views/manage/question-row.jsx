@@ -93,7 +93,6 @@ class QuestionRow extends React.Component {
   }
 
   get editingView() {
-    console.log('disabled?', this.disabled)
     return this.getRow(
       <ContentInput
         defaultValue={this.state.content}
