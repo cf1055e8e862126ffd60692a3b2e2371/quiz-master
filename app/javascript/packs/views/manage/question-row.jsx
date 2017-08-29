@@ -77,8 +77,8 @@ class QuestionRow extends React.Component {
     return (
       <tr>
         <td>{this.props.order}</td>
-        <td>{contentCell}</td>
-        <td>{answerCell}</td>
+        <td className="question-content-cell">{contentCell}</td>
+        <td className="question-answer-cell">{answerCell}</td>
         <td>{buttonCell}</td>
       </tr>
     )

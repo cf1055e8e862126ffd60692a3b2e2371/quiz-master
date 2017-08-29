@@ -21,8 +21,31 @@ $manage-input-margin-top: 5px;
   }
 }
 
+@media screen and (min-width: 1300px) {
+  .question-content-cell {
+    max-width: 700px;
+    min-width: 500px;
+  }
+
+  .question-answer-cell {
+    max-width: 500px;
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 1299px) {
+  .question-content-cell {
+    max-width: 500px;
+    min-width: 300px;
+  }
+
+  .question-answer-cell {
+    max-width: 400px;
+    min-width: 200px;
+  }
+}
+
 .manage-content-input {
-  width: 100%;
   height: 100px;
   overflow: auto;
   margin-top: $manage-input-margin-top;
@@ -52,10 +75,9 @@ $manage-input-margin-top: 5px;
 
 .manage-question-content-preview {
   @include question-preview;
-  max-width: 500px;
   max-height: 200px;
 }
 
 .manage-question-answer-preview {
-  max-width: 400px;
+  @include question-preview;
 }
