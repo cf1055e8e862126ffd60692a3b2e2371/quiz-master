@@ -23,7 +23,7 @@ EditingButtons.propTypes = {
 }
 
 EditingButtons.defaultProps = {
-  disabled: false
+  disabled: false,
 }
 
 export default EditingButtons
