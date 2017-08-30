@@ -25,10 +25,10 @@ describe('#getQuestionsSaga', () => {
       const gen = getQuestionsSaga(commandId, commandName)
       expect(gen.next().value).toMatchObject(call(Api.getList))
       expect(gen.next({ data: questions }).value).toMatchObject(
-        put(setQuestions({ questions }))
+        put(setQuestions({ questions })),
       )
       expect(gen.next().value).toMatchObject(
-        put(successCommand(commandId, commandName))
+        put(successCommand(commandId, commandName)),
       )
     })
   })
@@ -39,7 +39,7 @@ describe('#getQuestionsSaga', () => {
       const errorMsg = 'hoge'
       expect(gen.next().value).toMatchObject(call(Api.getList))
       expect(gen.throw(new Error(errorMsg)).value).toMatchObject(
-        put(failCommand(commandId, commandName, errorMsg))
+        put(failCommand(commandId, commandName, errorMsg)),
       )
     })
   })
@@ -53,10 +53,10 @@ describe('#addQuestionSaga', () => {
       const gen = addQuestionSaga(commandId, commandName, question)
       expect(gen.next().value).toMatchObject(call(Api.add, question))
       expect(gen.next({ data: question }).value).toMatchObject(
-        put(addQuestion(question))
+        put(addQuestion(question)),
       )
       expect(gen.next().value).toMatchObject(
-        put(successCommand(commandId, commandName))
+        put(successCommand(commandId, commandName)),
       )
     })
   })
@@ -67,7 +67,7 @@ describe('#addQuestionSaga', () => {
       const errorMsg = 'hoge'
       expect(gen.next().value).toMatchObject(call(Api.add, question))
       expect(gen.throw(new Error(errorMsg)).value).toMatchObject(
-        put(failCommand(commandId, commandName, errorMsg))
+        put(failCommand(commandId, commandName, errorMsg)),
       )
     })
   })
@@ -81,10 +81,10 @@ describe('#updateQuestionSaga', () => {
       const gen = updateQuestionSaga(commandId, commandName, question)
       expect(gen.next().value).toMatchObject(call(Api.update, question))
       expect(gen.next({ data: question }).value).toMatchObject(
-        put(updateQuestion(question))
+        put(updateQuestion(question)),
       )
       expect(gen.next().value).toMatchObject(
-        put(successCommand(commandId, commandName))
+        put(successCommand(commandId, commandName)),
       )
     })
   })
@@ -95,7 +95,7 @@ describe('#updateQuestionSaga', () => {
       const errorMsg = 'hoge'
       expect(gen.next().value).toMatchObject(call(Api.update, question))
       expect(gen.throw(new Error(errorMsg)).value).toMatchObject(
-        put(failCommand(commandId, commandName, errorMsg))
+        put(failCommand(commandId, commandName, errorMsg)),
       )
     })
   })
@@ -109,10 +109,10 @@ describe('#deleteQuestionSaga', () => {
       const gen = deleteQuestionSaga(commandId, commandName, questionId)
       expect(gen.next().value).toMatchObject(call(Api.delete, questionId))
       expect(gen.next().value).toMatchObject(
-        put(deleteQuestion(questionId))
+        put(deleteQuestion(questionId)),
       )
       expect(gen.next().value).toMatchObject(
-        put(successCommand(commandId, commandName))
+        put(successCommand(commandId, commandName)),
       )
     })
   })
@@ -123,7 +123,7 @@ describe('#deleteQuestionSaga', () => {
       const errorMsg = 'hoge'
       expect(gen.next().value).toMatchObject(call(Api.delete, questionId))
       expect(gen.throw(new Error(errorMsg)).value).toMatchObject(
-        put(failCommand(commandId, commandName, errorMsg))
+        put(failCommand(commandId, commandName, errorMsg)),
       )
     })
   })
