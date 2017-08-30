@@ -73,3 +73,10 @@ $ yarn test
 ```
 $ yarn run lint
 ```
+
+### Confirmed Environments
+
+- Browser: Chrome 60.0+
+- Server:
+  - Linux Mint 17.3 (Ubuntu 14.04 base)
+  - MacOS Sierra
