@@ -76,7 +76,9 @@ $ yarn run lint
 
 ### Confirmed Environments
 
-- Browser: Chrome 60.0+
+- Browser:
+  - Chrome 60.0+
+  - Safari 10.1.2
 - Server:
   - Linux Mint 17.3 (Ubuntu 14.04 base)
   - MacOS Sierra
