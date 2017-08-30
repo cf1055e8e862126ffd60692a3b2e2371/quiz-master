@@ -12,11 +12,12 @@ import Api from '../apis/question'
 export function* getQuestionsSaga(commandId, name) {
   try {
     const response = yield call(Api.getList)
+    console.log('response', response)
     const questions = response.data
     yield put(setQuestions({ questions }))
     yield put(successCommand(commandId, name))
   } catch (e) {
-    yield put(failCommand(commandId, name, 'Getting questions has been failed.'))
+    yield put(failCommand(commandId, name, e.message))
   }
 }
 
@@ -26,7 +27,7 @@ export function* addQuestionSaga(commandId, name, { content, answer }) {
     yield put(addQuestion(response.data))
     yield put(successCommand(commandId, name))
   } catch (e) {
-    yield put(failCommand(commandId, name, 'Adding question has been failed.'))
+    yield put(failCommand(commandId, name, e.message))
   }
 }
 
@@ -36,7 +37,7 @@ export function* updateQuestionSaga(commandId, name, { id, content, answer }) {
     yield put(updateQuestion(response.data))
     yield put(successCommand(commandId, name))
   } catch (e) {
-    yield put(failCommand(commandId, name, 'Updating question has been failed.'))
+    yield put(failCommand(commandId, name, e.message))
   }
 }
 
@@ -46,6 +47,6 @@ export function* deleteQuestionSaga(commandId, name, id) {
     yield put(deleteQuestion(id))
     yield put(successCommand(commandId, name))
   } catch (e) {
-    yield put(failCommand(commandId, name, 'Deleting question has been failed.'))
+    yield put(failCommand(commandId, name, e.message))
   }
 }
