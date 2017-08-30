@@ -12,7 +12,6 @@ import Api from '../apis/question'
 export function* getQuestionsSaga(commandId, name) {
   try {
     const response = yield call(Api.getList)
-    console.log('response', response)
     const questions = response.data
     yield put(setQuestions({ questions }))
     yield put(successCommand(commandId, name))
