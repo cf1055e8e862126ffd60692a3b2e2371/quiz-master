@@ -67,7 +67,7 @@ class QuizBody extends React.Component {
 
   render() {
     return (
-      <section className="form-horizontal">
+      <div className="form-horizontal">
         <QuestionContent
           content={this.props.question.content}
           page={this.props.page}
@@ -82,7 +82,7 @@ class QuizBody extends React.Component {
           {this.renderButton()}
           {this.renderShowAnswerButton()}
         </div>
-      </section>
+      </div>
     )
   }
 }
